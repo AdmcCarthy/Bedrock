@@ -1,0 +1,924 @@
+{
+ "geology_layers": 1,
+ "region": "norway",
+ "name": "Norway",
+ "bbox": [
+  3.5,
+  57.5,
+  32.0,
+  71.5
+ ],
+ "projection": {
+  "type": "conicEqualArea",
+  "parallels": [
+   60,
+   70
+  ],
+  "rotate": [
+   -15,
+   0
+  ]
+ },
+ "work_crs": "EPSG:3035",
+ "crs": "EPSG:4258 lon/lat",
+ "built": "2026-11-09T22:46:26+00:00",
+ "levels": {
+  "overview": {
+   "scale": 10000000,
+   "metres_per_px": 2646.0,
+   "tolerance_m": 2117,
+   "min_unit_m2": 42007896,
+   "budget_mb": 1.5,
+   "maps": [
+    {
+     "map_id": "se_sgu_1m_bedrock",
+     "file": "overview__se_sgu_1m_bedrock.topojson",
+     "title": "Sweden, SGU bedrock 1:1 000 000",
+     "register_id": "sgu-bedrock-1m",
+     "source_scale": 1000000,
+     "bytes": 402956,
+     "over_budget": false,
+     "units_in": 8800,
+     "units_in_frame": 8050,
+     "units_out": 953,
+     "points_in": 691026,
+     "points_out": 27799,
+     "merged": 7097,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Orosirian": 431,
+      "Statherian": 233,
+      "Cryogenian": 55,
+      "Cambrian": 43,
+      "Ectasian": 43,
+      "Silurian": 41,
+      "Calymmian": 33,
+      "Ediacaran": 28,
+      "Ordovician": 14,
+      "Rhyacian": 7,
+      "Tonian": 6,
+      "Mesoarchean": 5,
+      "Neoarchean": 4,
+      "Stenian": 2,
+      "Siderian": 2,
+      "Carboniferous": 1,
+      "Jurassic": 1
+     },
+     "licence": {
+      "name": "SGU says its open geodata is free of charge and may be used and published freely; no licence name seen",
+      "status": "reported"
+     },
+     "attribution": "Source: SGU",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "fi_gtk_1m_rocktypes",
+     "file": "overview__fi_gtk_1m_rocktypes.topojson",
+     "title": "Finland, GTK generalised bedrock rock types 1:1 000 000",
+     "register_id": "gtk-bedrock-finland",
+     "source_scale": 1000000,
+     "bytes": 341122,
+     "over_budget": false,
+     "units_in": 4610,
+     "units_in_frame": 4610,
+     "units_out": 826,
+     "points_in": 423559,
+     "points_out": 21940,
+     "merged": 3784,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Orosirian": 505,
+      "Rhyacian": 80,
+      "Neoarchean": 52,
+      "Statherian": 19,
+      "Siderian": 15,
+      "Calymmian": 11,
+      "Ectasian": 7,
+      "Cambrian": 3,
+      "Tonian": 2,
+      "Upper Cretaceous": 1
+     },
+     "licence": {
+      "name": "GTK Open Licence, compatible with CC BY 4.0, valid from 1 December 2025",
+      "status": "reported"
+     },
+     "attribution": "Contains data from the Geological Survey of Finland (GTK), CC BY 4.0 compatible open licence",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "no_ngu_n1350_units",
+     "file": "overview__no_ngu_n1350_units.topojson",
+     "title": "Norway, NGU bedrock units 1:1 350 000",
+     "register_id": "ngu-bedrock-1350k",
+     "source_scale": 1350000,
+     "bytes": 378060,
+     "over_budget": false,
+     "units_in": 4637,
+     "units_in_frame": 4637,
+     "units_out": 922,
+     "points_in": 3940533,
+     "points_out": 26609,
+     "merged": 3715,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Tonian": 138,
+      "Ordovician": 132,
+      "Ectasian": 107,
+      "Cryogenian": 99,
+      "Calymmian": 68,
+      "Ediacaran": 55,
+      "Orosirian": 50,
+      "Statherian": 48,
+      "Rhyacian": 45,
+      "Stenian": 38,
+      "Silurian": 36,
+      "Cambrian": 33,
+      "Neoarchean": 20,
+      "Permian": 16,
+      "Llandovery": 8,
+      "Devonian": 7,
+      "Lower Ordovician": 6,
+      "Cretaceous": 5,
+      "Mesoarchean": 5,
+      "Jurassic": 3,
+      "Cisuralian": 2,
+      "Triassic": 1
+     },
+     "licence": {
+      "name": "NLOD; credit NGU",
+      "status": "reported"
+     },
+     "attribution": "Contains data made available by NGU under NLOD",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    }
+   ]
+  },
+  "regional": {
+   "scale": 3000000,
+   "metres_per_px": 793.8,
+   "tolerance_m": 635,
+   "min_unit_m2": 2520474,
+   "budget_mb": 4,
+   "maps": [
+    {
+     "map_id": "se_sgu_1m_bedrock",
+     "file": "regional__se_sgu_1m_bedrock.topojson",
+     "title": "Sweden, SGU bedrock 1:1 000 000",
+     "register_id": "sgu-bedrock-1m",
+     "source_scale": 1000000,
+     "bytes": 2735975,
+     "over_budget": false,
+     "units_in": 8800,
+     "units_in_frame": 8050,
+     "units_out": 5085,
+     "points_in": 691026,
+     "points_out": 125007,
+     "merged": 2965,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Orosirian": 2414,
+      "Statherian": 1170,
+      "Ectasian": 279,
+      "Cambrian": 247,
+      "Silurian": 230,
+      "Calymmian": 217,
+      "Cryogenian": 212,
+      "Ordovician": 93,
+      "Ediacaran": 68,
+      "Rhyacian": 47,
+      "Mesoarchean": 30,
+      "Siderian": 27,
+      "Tonian": 21,
+      "Carboniferous": 9,
+      "Neoarchean": 9,
+      "Stenian": 5,
+      "Upper Cretaceous": 1,
+      "Jurassic": 1
+     },
+     "licence": {
+      "name": "SGU says its open geodata is free of charge and may be used and published freely; no licence name seen",
+      "status": "reported"
+     },
+     "attribution": "Source: SGU",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "fi_gtk_1m_rocktypes",
+     "file": "regional__fi_gtk_1m_rocktypes.topojson",
+     "title": "Finland, GTK generalised bedrock rock types 1:1 000 000",
+     "register_id": "gtk-bedrock-finland",
+     "source_scale": 1000000,
+     "bytes": 1648442,
+     "over_budget": false,
+     "units_in": 4610,
+     "units_in_frame": 4610,
+     "units_out": 3902,
+     "points_in": 423559,
+     "points_out": 101303,
+     "merged": 708,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Orosirian": 2512,
+      "Rhyacian": 473,
+      "Neoarchean": 248,
+      "Siderian": 103,
+      "Statherian": 70,
+      "Calymmian": 19,
+      "Ectasian": 16,
+      "Cambrian": 7,
+      "Tonian": 2,
+      "Devonian": 2,
+      "Ediacaran": 1,
+      "Upper Cretaceous": 1,
+      "Wenlock": 1
+     },
+     "licence": {
+      "name": "GTK Open Licence, compatible with CC BY 4.0, valid from 1 December 2025",
+      "status": "reported"
+     },
+     "attribution": "Contains data from the Geological Survey of Finland (GTK), CC BY 4.0 compatible open licence",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "no_ngu_n1350_units",
+     "file": "regional__no_ngu_n1350_units.topojson",
+     "title": "Norway, NGU bedrock units 1:1 350 000",
+     "register_id": "ngu-bedrock-1350k",
+     "source_scale": 1350000,
+     "bytes": 1844538,
+     "over_budget": false,
+     "units_in": 4637,
+     "units_in_frame": 4637,
+     "units_out": 3793,
+     "points_in": 3940533,
+     "points_out": 109626,
+     "merged": 844,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Ectasian": 511,
+      "Tonian": 490,
+      "Cryogenian": 478,
+      "Ordovician": 440,
+      "Ediacaran": 249,
+      "Statherian": 243,
+      "Calymmian": 240,
+      "Rhyacian": 211,
+      "Cambrian": 184,
+      "Orosirian": 182,
+      "Silurian": 158,
+      "Stenian": 138,
+      "Permian": 102,
+      "Neoarchean": 55,
+      "Lower Ordovician": 26,
+      "Devonian": 22,
+      "Llandovery": 20,
+      "Mesoarchean": 14,
+      "Cisuralian": 13,
+      "Jurassic": 8,
+      "Cretaceous": 7,
+      "Triassic": 2
+     },
+     "licence": {
+      "name": "NLOD; credit NGU",
+      "status": "reported"
+     },
+     "attribution": "Contains data made available by NGU under NLOD",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    }
+   ]
+  },
+  "detail": {
+   "scale": 1000000,
+   "metres_per_px": 264.59999999999997,
+   "tolerance_m": 185,
+   "min_unit_m2": 210039,
+   "budget_mb": 8,
+   "maps": [
+    {
+     "map_id": "se_sgu_1m_bedrock",
+     "file": "detail__se_sgu_1m_bedrock.topojson",
+     "title": "Sweden, SGU bedrock 1:1 000 000",
+     "register_id": "sgu-bedrock-1m",
+     "source_scale": 1000000,
+     "bytes": 6142385,
+     "over_budget": false,
+     "units_in": 8800,
+     "units_in_frame": 8050,
+     "units_out": 8000,
+     "points_in": 691026,
+     "points_out": 335070,
+     "merged": 50,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Orosirian": 3739,
+      "Statherian": 1898,
+      "Ectasian": 476,
+      "Cambrian": 447,
+      "Silurian": 351,
+      "Calymmian": 322,
+      "Cryogenian": 316,
+      "Ordovician": 148,
+      "Ediacaran": 85,
+      "Rhyacian": 64,
+      "Mesoarchean": 53,
+      "Siderian": 40,
+      "Tonian": 26,
+      "Carboniferous": 12,
+      "Neoarchean": 10,
+      "Stenian": 6,
+      "Upper Cretaceous": 1,
+      "Jurassic": 1
+     },
+     "licence": {
+      "name": "SGU says its open geodata is free of charge and may be used and published freely; no licence name seen",
+      "status": "reported"
+     },
+     "attribution": "Source: SGU",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "fi_gtk_1m_rocktypes",
+     "file": "detail__fi_gtk_1m_rocktypes.topojson",
+     "title": "Finland, GTK generalised bedrock rock types 1:1 000 000",
+     "register_id": "gtk-bedrock-finland",
+     "source_scale": 1000000,
+     "bytes": 2937405,
+     "over_budget": false,
+     "units_in": 4610,
+     "units_in_frame": 4610,
+     "units_out": 4610,
+     "points_in": 423559,
+     "points_out": 239037,
+     "merged": 0,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Orosirian": 2964,
+      "Rhyacian": 583,
+      "Neoarchean": 291,
+      "Siderian": 117,
+      "Statherian": 89,
+      "Calymmian": 20,
+      "Ectasian": 18,
+      "Cambrian": 7,
+      "Tonian": 4,
+      "Devonian": 2,
+      "Ediacaran": 1,
+      "Upper Cretaceous": 1,
+      "Wenlock": 1
+     },
+     "licence": {
+      "name": "GTK Open Licence, compatible with CC BY 4.0, valid from 1 December 2025",
+      "status": "reported"
+     },
+     "attribution": "Contains data from the Geological Survey of Finland (GTK), CC BY 4.0 compatible open licence",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "no_ngu_n1350_units",
+     "skipped": "source 1:1350000 is coarser than this level"
+    }
+   ]
+  }
+ },
+ "chart": {
+  "Phanerozoic": {
+   "hex": "#9ad9dd",
+   "start_ma": 538.8,
+   "end_ma": 0.0,
+   "rank": "eon"
+  },
+  "Cenozoic": {
+   "hex": "#f2f91d",
+   "start_ma": 66.0,
+   "end_ma": 0.0,
+   "rank": "era"
+  },
+  "Quaternary": {
+   "hex": "#f9f97f",
+   "start_ma": 2.58,
+   "end_ma": 0.0,
+   "rank": "period"
+  },
+  "Holocene": {
+   "hex": "#fef2ec",
+   "start_ma": 0.0117,
+   "end_ma": 0.0,
+   "rank": "epoch"
+  },
+  "Pleistocene": {
+   "hex": "#fff2ae",
+   "start_ma": 2.58,
+   "end_ma": 0.0117,
+   "rank": "epoch"
+  },
+  "Neogene": {
+   "hex": "#ffe619",
+   "start_ma": 23.03,
+   "end_ma": 2.58,
+   "rank": "period"
+  },
+  "Pliocene": {
+   "hex": "#ffff99",
+   "start_ma": 5.333,
+   "end_ma": 2.58,
+   "rank": "epoch"
+  },
+  "Miocene": {
+   "hex": "#ffff00",
+   "start_ma": 23.03,
+   "end_ma": 5.333,
+   "rank": "epoch"
+  },
+  "Paleogene": {
+   "hex": "#fd9a52",
+   "start_ma": 66.0,
+   "end_ma": 23.03,
+   "rank": "period"
+  },
+  "Oligocene": {
+   "hex": "#fdc07a",
+   "start_ma": 33.9,
+   "end_ma": 23.03,
+   "rank": "epoch"
+  },
+  "Eocene": {
+   "hex": "#fdb46c",
+   "start_ma": 56.0,
+   "end_ma": 33.9,
+   "rank": "epoch"
+  },
+  "Paleocene": {
+   "hex": "#fda75f",
+   "start_ma": 66.0,
+   "end_ma": 56.0,
+   "rank": "epoch"
+  },
+  "Mesozoic": {
+   "hex": "#67c5ca",
+   "start_ma": 251.902,
+   "end_ma": 66.0,
+   "rank": "era"
+  },
+  "Cretaceous": {
+   "hex": "#7fc64e",
+   "start_ma": 145.0,
+   "end_ma": 66.0,
+   "rank": "period"
+  },
+  "Upper Cretaceous": {
+   "hex": "#a6d84a",
+   "start_ma": 100.5,
+   "end_ma": 66.0,
+   "rank": "epoch"
+  },
+  "Lower Cretaceous": {
+   "hex": "#8ccd57",
+   "start_ma": 145.0,
+   "end_ma": 100.5,
+   "rank": "epoch"
+  },
+  "Jurassic": {
+   "hex": "#34b2c9",
+   "start_ma": 201.4,
+   "end_ma": 145.0,
+   "rank": "period"
+  },
+  "Upper Jurassic": {
+   "hex": "#b3e3ee",
+   "start_ma": 161.5,
+   "end_ma": 145.0,
+   "rank": "epoch"
+  },
+  "Middle Jurassic": {
+   "hex": "#80cfd8",
+   "start_ma": 174.7,
+   "end_ma": 161.5,
+   "rank": "epoch"
+  },
+  "Lower Jurassic": {
+   "hex": "#42aed0",
+   "start_ma": 201.4,
+   "end_ma": 174.7,
+   "rank": "epoch"
+  },
+  "Triassic": {
+   "hex": "#812b92",
+   "start_ma": 251.902,
+   "end_ma": 201.4,
+   "rank": "period"
+  },
+  "Upper Triassic": {
+   "hex": "#bd8cc3",
+   "start_ma": 237.0,
+   "end_ma": 201.4,
+   "rank": "epoch"
+  },
+  "Middle Triassic": {
+   "hex": "#b168b1",
+   "start_ma": 247.2,
+   "end_ma": 237.0,
+   "rank": "epoch"
+  },
+  "Lower Triassic": {
+   "hex": "#a4469f",
+   "start_ma": 251.902,
+   "end_ma": 247.2,
+   "rank": "epoch"
+  },
+  "Paleozoic": {
+   "hex": "#99c08d",
+   "start_ma": 538.8,
+   "end_ma": 251.902,
+   "rank": "era"
+  },
+  "Permian": {
+   "hex": "#f04028",
+   "start_ma": 298.9,
+   "end_ma": 251.902,
+   "rank": "period"
+  },
+  "Lopingian": {
+   "hex": "#fba794",
+   "start_ma": 259.51,
+   "end_ma": 251.902,
+   "rank": "epoch"
+  },
+  "Guadalupian": {
+   "hex": "#fb745c",
+   "start_ma": 273.01,
+   "end_ma": 259.51,
+   "rank": "epoch"
+  },
+  "Cisuralian": {
+   "hex": "#ef5845",
+   "start_ma": 298.9,
+   "end_ma": 273.01,
+   "rank": "epoch"
+  },
+  "Carboniferous": {
+   "hex": "#67a599",
+   "start_ma": 358.9,
+   "end_ma": 298.9,
+   "rank": "period"
+  },
+  "Pennsylvanian": {
+   "hex": "#99c2b5",
+   "start_ma": 323.2,
+   "end_ma": 298.9,
+   "rank": "subperiod"
+  },
+  "Mississippian": {
+   "hex": "#678f66",
+   "start_ma": 358.9,
+   "end_ma": 323.2,
+   "rank": "subperiod"
+  },
+  "Devonian": {
+   "hex": "#cb8c37",
+   "start_ma": 419.2,
+   "end_ma": 358.9,
+   "rank": "period"
+  },
+  "Upper Devonian": {
+   "hex": "#f1e19d",
+   "start_ma": 382.7,
+   "end_ma": 358.9,
+   "rank": "epoch"
+  },
+  "Middle Devonian": {
+   "hex": "#f1c868",
+   "start_ma": 393.3,
+   "end_ma": 382.7,
+   "rank": "epoch"
+  },
+  "Lower Devonian": {
+   "hex": "#e5ac4d",
+   "start_ma": 419.2,
+   "end_ma": 393.3,
+   "rank": "epoch"
+  },
+  "Silurian": {
+   "hex": "#b3e1b6",
+   "start_ma": 443.8,
+   "end_ma": 419.2,
+   "rank": "period"
+  },
+  "Pridoli": {
+   "hex": "#e6f5e1",
+   "start_ma": 423.0,
+   "end_ma": 419.2,
+   "rank": "epoch"
+  },
+  "Ludlow": {
+   "hex": "#bfe6cf",
+   "start_ma": 427.4,
+   "end_ma": 423.0,
+   "rank": "epoch"
+  },
+  "Wenlock": {
+   "hex": "#b3e1c2",
+   "start_ma": 433.4,
+   "end_ma": 427.4,
+   "rank": "epoch"
+  },
+  "Llandovery": {
+   "hex": "#99d7b3",
+   "start_ma": 443.8,
+   "end_ma": 433.4,
+   "rank": "epoch"
+  },
+  "Ordovician": {
+   "hex": "#009270",
+   "start_ma": 485.4,
+   "end_ma": 443.8,
+   "rank": "period"
+  },
+  "Upper Ordovician": {
+   "hex": "#7fca93",
+   "start_ma": 458.4,
+   "end_ma": 443.8,
+   "rank": "epoch"
+  },
+  "Middle Ordovician": {
+   "hex": "#4db47e",
+   "start_ma": 470.0,
+   "end_ma": 458.4,
+   "rank": "epoch"
+  },
+  "Lower Ordovician": {
+   "hex": "#1a9d6f",
+   "start_ma": 485.4,
+   "end_ma": 470.0,
+   "rank": "epoch"
+  },
+  "Cambrian": {
+   "hex": "#7fa056",
+   "start_ma": 538.8,
+   "end_ma": 485.4,
+   "rank": "period"
+  },
+  "Furongian": {
+   "hex": "#b3e095",
+   "start_ma": 497.0,
+   "end_ma": 485.4,
+   "rank": "epoch"
+  },
+  "Miaolingian": {
+   "hex": "#a6cf86",
+   "start_ma": 509.0,
+   "end_ma": 497.0,
+   "rank": "epoch"
+  },
+  "Cambrian Series 2": {
+   "hex": "#99c078",
+   "start_ma": 521.0,
+   "end_ma": 509.0,
+   "rank": "epoch"
+  },
+  "Terreneuvian": {
+   "hex": "#8cb06c",
+   "start_ma": 538.8,
+   "end_ma": 521.0,
+   "rank": "epoch"
+  },
+  "Precambrian": {
+   "hex": "#f74370",
+   "start_ma": 4567.0,
+   "end_ma": 538.8,
+   "rank": "supereon"
+  },
+  "Proterozoic": {
+   "hex": "#f73563",
+   "start_ma": 2500.0,
+   "end_ma": 538.8,
+   "rank": "eon"
+  },
+  "Neoproterozoic": {
+   "hex": "#feb342",
+   "start_ma": 1000.0,
+   "end_ma": 538.8,
+   "rank": "era"
+  },
+  "Ediacaran": {
+   "hex": "#fed96a",
+   "start_ma": 635.0,
+   "end_ma": 538.8,
+   "rank": "period"
+  },
+  "Cryogenian": {
+   "hex": "#fecc5c",
+   "start_ma": 720.0,
+   "end_ma": 635.0,
+   "rank": "period"
+  },
+  "Tonian": {
+   "hex": "#febf4e",
+   "start_ma": 1000.0,
+   "end_ma": 720.0,
+   "rank": "period"
+  },
+  "Mesoproterozoic": {
+   "hex": "#fdb462",
+   "start_ma": 1600.0,
+   "end_ma": 1000.0,
+   "rank": "era"
+  },
+  "Stenian": {
+   "hex": "#fed99a",
+   "start_ma": 1200.0,
+   "end_ma": 1000.0,
+   "rank": "period"
+  },
+  "Ectasian": {
+   "hex": "#fdcc8a",
+   "start_ma": 1400.0,
+   "end_ma": 1200.0,
+   "rank": "period"
+  },
+  "Calymmian": {
+   "hex": "#fdc07a",
+   "start_ma": 1600.0,
+   "end_ma": 1400.0,
+   "rank": "period"
+  },
+  "Paleoproterozoic": {
+   "hex": "#f74370",
+   "start_ma": 2500.0,
+   "end_ma": 1600.0,
+   "rank": "era"
+  },
+  "Statherian": {
+   "hex": "#f875a7",
+   "start_ma": 1800.0,
+   "end_ma": 1600.0,
+   "rank": "period"
+  },
+  "Orosirian": {
+   "hex": "#f76898",
+   "start_ma": 2050.0,
+   "end_ma": 1800.0,
+   "rank": "period"
+  },
+  "Rhyacian": {
+   "hex": "#f75b89",
+   "start_ma": 2300.0,
+   "end_ma": 2050.0,
+   "rank": "period"
+  },
+  "Siderian": {
+   "hex": "#f74f7c",
+   "start_ma": 2500.0,
+   "end_ma": 2300.0,
+   "rank": "period"
+  },
+  "Archean": {
+   "hex": "#f0047f",
+   "start_ma": 4031.0,
+   "end_ma": 2500.0,
+   "rank": "eon"
+  },
+  "Neoarchean": {
+   "hex": "#f99bc1",
+   "start_ma": 2800.0,
+   "end_ma": 2500.0,
+   "rank": "era"
+  },
+  "Mesoarchean": {
+   "hex": "#f768a9",
+   "start_ma": 3200.0,
+   "end_ma": 2800.0,
+   "rank": "era"
+  },
+  "Paleoarchean": {
+   "hex": "#f4449f",
+   "start_ma": 3600.0,
+   "end_ma": 3200.0,
+   "rank": "era"
+  },
+  "Eoarchean": {
+   "hex": "#da037f",
+   "start_ma": 4031.0,
+   "end_ma": 3600.0,
+   "rank": "era"
+  },
+  "Hadean": {
+   "hex": "#ae027e",
+   "start_ma": 4567.0,
+   "end_ma": 4031.0,
+   "rank": "eon"
+  }
+ },
+ "lithology": {
+  "unconsolidated": {
+   "label": "Unconsolidated deposits",
+   "group": "surficial",
+   "hex": "#efe6cf"
+  },
+  "clastic": {
+   "label": "Clastic sedimentary rocks",
+   "group": "sedimentary",
+   "hex": "#d9b26f"
+  },
+  "carbonate": {
+   "label": "Carbonate rocks",
+   "group": "sedimentary",
+   "hex": "#9fc5e8"
+  },
+  "evaporite": {
+   "label": "Evaporites",
+   "group": "sedimentary",
+   "hex": "#e6c2e0"
+  },
+  "sedimentary_undiff": {
+   "label": "Sedimentary rocks, undifferentiated",
+   "group": "sedimentary",
+   "hex": "#c9a86a"
+  },
+  "volcanic_felsic": {
+   "label": "Felsic and intermediate volcanic rocks",
+   "group": "igneous",
+   "hex": "#e9967a"
+  },
+  "volcanic_mafic": {
+   "label": "Mafic volcanic rocks",
+   "group": "igneous",
+   "hex": "#8b3a3a"
+  },
+  "plutonic_felsic": {
+   "label": "Granitoids and felsic igneous rocks",
+   "group": "igneous",
+   "hex": "#e76f51"
+  },
+  "plutonic_mafic": {
+   "label": "Mafic and ultramafic rocks, mainly intrusive",
+   "group": "igneous",
+   "hex": "#5c3d2e"
+  },
+  "igneous_undiff": {
+   "label": "Igneous rocks, undifferentiated",
+   "group": "igneous",
+   "hex": "#c25a4a"
+  },
+  "gneiss": {
+   "label": "Gneiss, migmatite and granulite",
+   "group": "metamorphic",
+   "hex": "#7b8fb5"
+  },
+  "schist": {
+   "label": "Schist, phyllite and slate",
+   "group": "metamorphic",
+   "hex": "#9aa6c4"
+  },
+  "quartzite": {
+   "label": "Quartzite",
+   "group": "metamorphic",
+   "hex": "#cfd8e8"
+  },
+  "amphibolite": {
+   "label": "Amphibolite, greenstone and metavolcanic rocks",
+   "group": "metamorphic",
+   "hex": "#4f7369"
+  },
+  "marble": {
+   "label": "Marble",
+   "group": "metamorphic",
+   "hex": "#dfe8f0"
+  },
+  "metamorphic_undiff": {
+   "label": "Metamorphic rocks, undifferentiated",
+   "group": "metamorphic",
+   "hex": "#6b7fa3"
+  },
+  "ice_water": {
+   "label": "Ice, water and non-geological",
+   "group": "other",
+   "hex": "#f2f6fa"
+  },
+  "unknown": {
+   "label": "Not classified",
+   "group": "other",
+   "hex": "#d9d9d9"
+  }
+ },
+ "attribution": [
+  "Source: SGU",
+  "Contains data from the Geological Survey of Finland (GTK), CC BY 4.0 compatible open licence",
+  "Contains data made available by NGU under NLOD"
+ ]
+}

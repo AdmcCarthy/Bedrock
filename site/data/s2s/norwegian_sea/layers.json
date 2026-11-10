@@ -1,0 +1,217 @@
+{
+ "s2s_layers": 1,
+ "region": "norwegian_sea",
+ "name": "Norwegian Sea margin: Norway north of Stad, Sweden and Finland north of 61",
+ "crs": "+proj=lcc +lat_1=62 +lat_2=70 +lat_0=66 +lon_0=8 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs",
+ "extent": [
+  -590000,
+  -510000,
+  480000,
+  490000
+ ],
+ "bbox": [
+  -7.435,
+  60.946,
+  20.645,
+  70.41
+ ],
+ "relief": {
+  "region": "norwegian_sea",
+  "level": "regional",
+  "hillshade": "relief/norwegian_sea/regional_hillshade.png",
+  "bands": "relief/norwegian_sea/regional.geojson",
+  "shape": [
+   1000,
+   1070
+  ],
+  "attribution": "Relief: Copernicus DEM GLO-90 (ESA), EMODnet Bathymetry; see Relief/docs/sources.md"
+ },
+ "files": {
+  "systems": "systems.topojson",
+  "subbasins": "subbasins.topojson",
+  "rivers": "rivers.topojson",
+  "outlets": "outlets.geojson"
+ },
+ "bytes": {
+  "systems": 203084,
+  "subbasins": 223887,
+  "rivers": 674527,
+  "outlets": 2728
+ },
+ "counts": {
+  "systems": 29,
+  "subbasins": 56,
+  "reaches": 3050,
+  "outlets": 11
+ },
+ "clusters": {
+  "0": {
+   "name": "Schist and phyllite, mainly older Proterozoic",
+   "n_systems": 4,
+   "mean": {
+    "frac_igneous_felsic": 0.411,
+    "frac_igneous_mafic": 0.048,
+    "frac_gneiss_quartzite": 0.0,
+    "frac_schist": 0.521,
+    "frac_clastic": 0.018,
+    "frac_carbonate": 0.002,
+    "frac_unconsolidated": 0.0,
+    "age_Cenozoic": 0.0,
+    "age_Mesozoic": 0.001,
+    "age_Paleozoic": 0.039,
+    "age_Neoproterozoic": 0.001,
+    "age_Older_Proterozoic": 0.883,
+    "age_Archean": 0.0
+   }
+  },
+  "1": {
+   "name": "Granite and felsic volcanics with schist and phyllite, mainly Paleozoic and older Proterozoic",
+   "n_systems": 9,
+   "mean": {
+    "frac_igneous_felsic": 0.295,
+    "frac_igneous_mafic": 0.097,
+    "frac_gneiss_quartzite": 0.218,
+    "frac_schist": 0.218,
+    "frac_clastic": 0.055,
+    "frac_carbonate": 0.117,
+    "frac_unconsolidated": 0.0,
+    "age_Cenozoic": 0.0,
+    "age_Mesozoic": 0.0,
+    "age_Paleozoic": 0.251,
+    "age_Neoproterozoic": 0.099,
+    "age_Older_Proterozoic": 0.239,
+    "age_Archean": 0.0
+   }
+  },
+  "2": {
+   "name": "Granite and felsic volcanics with schist and phyllite, mainly older Proterozoic",
+   "n_systems": 2,
+   "mean": {
+    "frac_igneous_felsic": 0.396,
+    "frac_igneous_mafic": 0.174,
+    "frac_gneiss_quartzite": 0.082,
+    "frac_schist": 0.224,
+    "frac_clastic": 0.091,
+    "frac_carbonate": 0.032,
+    "frac_unconsolidated": 0.0,
+    "age_Cenozoic": 0.0,
+    "age_Mesozoic": 0.0,
+    "age_Paleozoic": 0.125,
+    "age_Neoproterozoic": 0.012,
+    "age_Older_Proterozoic": 0.483,
+    "age_Archean": 0.101
+   }
+  },
+  "3": {
+   "name": "Granite and felsic volcanics, mainly older Proterozoic",
+   "n_systems": 12,
+   "mean": {
+    "frac_igneous_felsic": 0.611,
+    "frac_igneous_mafic": 0.173,
+    "frac_gneiss_quartzite": 0.008,
+    "frac_schist": 0.133,
+    "frac_clastic": 0.071,
+    "frac_carbonate": 0.003,
+    "frac_unconsolidated": 0.0,
+    "age_Cenozoic": 0.083,
+    "age_Mesozoic": 0.0,
+    "age_Paleozoic": 0.028,
+    "age_Neoproterozoic": 0.017,
+    "age_Older_Proterozoic": 0.779,
+    "age_Archean": 0.0
+   }
+  },
+  "4": {
+   "name": "Schist and phyllite with clastic sedimentary rocks, mainly older Proterozoic and Paleozoic",
+   "n_systems": 5,
+   "mean": {
+    "frac_igneous_felsic": 0.245,
+    "frac_igneous_mafic": 0.088,
+    "frac_gneiss_quartzite": 0.05,
+    "frac_schist": 0.34,
+    "frac_clastic": 0.247,
+    "frac_carbonate": 0.029,
+    "frac_unconsolidated": 0.002,
+    "age_Cenozoic": 0.0,
+    "age_Mesozoic": 0.0,
+    "age_Paleozoic": 0.287,
+    "age_Neoproterozoic": 0.092,
+    "age_Older_Proterozoic": 0.315,
+    "age_Archean": 0.0
+   }
+  }
+ },
+ "features": [
+  "frac_igneous_felsic",
+  "frac_igneous_mafic",
+  "frac_gneiss_quartzite",
+  "frac_schist",
+  "frac_clastic",
+  "frac_carbonate",
+  "frac_unconsolidated",
+  "frac_other",
+  "age_Cenozoic",
+  "age_Mesozoic",
+  "age_Paleozoic",
+  "age_Neoproterozoic",
+  "age_Older_Proterozoic",
+  "age_Archean",
+  "age_unread"
+ ],
+ "size_classes": {
+  "10,000 to 100,000 km2": 20,
+  "1,000 to 10,000 km2": 11,
+  "under 1,000 km2": 1
+ },
+ "geology_maps": [
+  "no_ngu_n1350_units",
+  "se_sgu_1m_bedrock",
+  "fi_gtk_1m_rocktypes",
+  "pl_pig_1m",
+  "uk_bgs_625k_bedrock",
+  "ni_gsni_250k_bedrock",
+  "ie_gsi_500k_bedrock",
+  "at_geosphere_500k",
+  "es_igme_1m_units",
+  "eu_igme5000"
+ ],
+ "sinks": [
+  {
+   "name": "Norwegian Sea",
+   "lon": 2.0,
+   "lat": 66.0
+  },
+  {
+   "name": "Gulf of Bothnia",
+   "lon": 20.0,
+   "lat": 63.5
+  }
+ ],
+ "attribution": [
+  "HydroSHEDS: Lehner, B., Grill G. (2013), Hydrological Processes 27(15); https://www.hydrosheds.org",
+  "Geology: the surveys named in geology-map-processing provenance files for no_ngu_n1350_units, se_sgu_1m_bedrock, fi_gtk_1m_rocktypes, pl_pig_1m, uk_bgs_625k_bedrock, ni_gsni_250k_bedrock, ie_gsi_500k_bedrock, at_geosphere_500k, es_igme_1m_units, eu_igme5000",
+  "Terrain: Relief (Copernicus DEM GLO-90, EMODnet Bathymetry)"
+ ],
+ "basis": "Observed: HydroSHEDS drainage (HydroBASINS, HydroRIVERS), the surveys' bedrock maps, Relief terrain and climate zones. Derived: area fractions of class, era and grain per catchment, named indices, k-means groups, the BQART budget and the sand quality and sand share proxies (docs/SAND_QUALITY.md, docs/BUDGET.md). Interpreted: the glauconite-prone flag and the reading in docs/CONCEPT.md.",
+ "built": "2026-11-10T07:58:34+00:00",
+ "budget": {
+  "catchments": 32,
+  "total_qs_mt_yr": 6.31180553562136,
+  "total_sand_mt_yr": 5.060012369815576,
+  "median_yield_t_km2_yr": 11.268138395134436,
+  "glauconite_prone": 12,
+  "calibration_factor": 2.5,
+  "calibration_basis": "no monitored river in this frame; the median factor of the North-east Europe frame is used",
+  "total_qs_cal_mt_yr": 2.524722214248544,
+  "total_sand_cal_mt_yr": 2.0240049479262305
+ },
+ "checks": [],
+ "slope_flow": {
+  "file": "slope_flow.geojson",
+  "lines": 4567,
+  "bytes": 7017180,
+  "gradient_p50": 0.010651416300485531,
+  "gradient_p90": 0.03357755127130078
+ },
+ "budget_recipe": "Sediment budget per catchment with BQART (Syvitski and Milliman 2007), a sand quality proxy and a sand supply proxy."
+}

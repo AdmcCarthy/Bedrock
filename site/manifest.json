@@ -1,0 +1,339 @@
+{
+ "geology": {
+  "norway": {
+   "name": "Norway",
+   "levels": [
+    "overview",
+    "regional",
+    "detail"
+   ],
+   "maps": {
+    "se_sgu_1m_bedrock": {
+     "title": "Sweden, SGU bedrock 1:1 000 000",
+     "licence": {
+      "name": "SGU says its open geodata is free of charge and may be used and published freely; no licence name seen",
+      "status": "reported"
+     },
+     "attribution": "Source: SGU"
+    },
+    "fi_gtk_1m_rocktypes": {
+     "title": "Finland, GTK generalised bedrock rock types 1:1 000 000",
+     "licence": {
+      "name": "GTK Open Licence, compatible with CC BY 4.0, valid from 1 December 2025",
+      "status": "reported"
+     },
+     "attribution": "Contains data from the Geological Survey of Finland (GTK), CC BY 4.0 compatible open licence"
+    },
+    "no_ngu_n1350_units": {
+     "title": "Norway, NGU bedrock units 1:1 350 000",
+     "licence": {
+      "name": "NLOD; credit NGU",
+      "status": "reported"
+     },
+     "attribution": "Contains data made available by NGU under NLOD"
+    }
+   },
+   "relief": false
+  },
+  "uk_ireland": {
+   "name": "Britain and Ireland",
+   "levels": [
+    "overview",
+    "regional",
+    "detail"
+   ],
+   "maps": {
+    "uk_bgs_625k_bedrock": {
+     "title": "Great Britain, BGS Geology 625k bedrock (DiGMapGB-625 v5)",
+     "licence": {
+      "name": "Open Government Licence, as reported by BGS; some catalogue records say licence not set",
+      "status": "reported"
+     },
+     "attribution": "Contains NERC materials (c) NERC [year]"
+    },
+    "ie_gsi_500k_bedrock": {
+     "title": "Ireland, GSI and GSNI bedrock 1:500 000",
+     "licence": {
+      "name": "CC BY 4.0 for data produced by the Geological Survey Ireland; UK Open Government Licence v3.0 for data produced by GSNI (read from the licence file in the archive)",
+      "status": "verified"
+     },
+     "attribution": "Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence."
+    },
+    "ni_gsni_250k_bedrock": {
+     "title": "Northern Ireland, GSNI bedrock polygons 1:250 000",
+     "licence": {
+      "name": "Open Government Licence v3.0 for GSNI data, as reported by Geological Survey Ireland",
+      "status": "reported"
+     },
+     "attribution": "Contains GSNI data under the Open Government Licence v3.0"
+    }
+   },
+   "relief": false
+  },
+  "north_sea": {
+   "name": "North Sea: Norway and Britain face to face",
+   "levels": [
+    "regional",
+    "detail"
+   ],
+   "maps": {
+    "uk_bgs_625k_bedrock": {
+     "title": "Great Britain, BGS Geology 625k bedrock (DiGMapGB-625 v5)",
+     "licence": {
+      "name": "Open Government Licence, as reported by BGS; some catalogue records say licence not set",
+      "status": "reported"
+     },
+     "attribution": "Contains NERC materials (c) NERC [year]"
+    },
+    "no_ngu_n1350_units": {
+     "title": "Norway, NGU bedrock units 1:1 350 000",
+     "licence": {
+      "name": "NLOD; credit NGU",
+      "status": "reported"
+     },
+     "attribution": "Contains data made available by NGU under NLOD"
+    },
+    "se_sgu_1m_bedrock": {
+     "title": "Sweden, SGU bedrock 1:1 000 000",
+     "licence": {
+      "name": "SGU says its open geodata is free of charge and may be used and published freely; no licence name seen",
+      "status": "reported"
+     },
+     "attribution": "Source: SGU"
+    }
+   },
+   "relief": true
+  },
+  "fennoscandia": {
+   "name": "Fennoscandia",
+   "levels": [
+    "overview",
+    "regional"
+   ],
+   "maps": {
+    "no_ngu_n1350_units": {
+     "title": "Norway, NGU bedrock units 1:1 350 000",
+     "licence": {
+      "name": "NLOD; credit NGU",
+      "status": "reported"
+     },
+     "attribution": "Contains data made available by NGU under NLOD"
+    },
+    "se_sgu_1m_bedrock": {
+     "title": "Sweden, SGU bedrock 1:1 000 000",
+     "licence": {
+      "name": "SGU says its open geodata is free of charge and may be used and published freely; no licence name seen",
+      "status": "reported"
+     },
+     "attribution": "Source: SGU"
+    },
+    "fi_gtk_1m_rocktypes": {
+     "title": "Finland, GTK generalised bedrock rock types 1:1 000 000",
+     "licence": {
+      "name": "GTK Open Licence, compatible with CC BY 4.0, valid from 1 December 2025",
+      "status": "reported"
+     },
+     "attribution": "Contains data from the Geological Survey of Finland (GTK), CC BY 4.0 compatible open licence"
+    }
+   },
+   "relief": false
+  },
+  "alps_east": {
+   "name": "Austria",
+   "levels": [
+    "regional",
+    "detail"
+   ],
+   "maps": {
+    "at_geosphere_500k": {
+     "title": "Austria, GeoSphere geological units 1:500 000",
+     "licence": {
+      "name": "CC BY 4.0 for the base map; not stated on the INSPIRE record",
+      "status": "reported"
+     },
+     "attribution": "GeoSphere Austria"
+    }
+   },
+   "relief": false
+  },
+  "ne_europe_open": {
+   "name": "North-east Europe, open-licence maps only",
+   "levels": [
+    "overview",
+    "regional"
+   ],
+   "maps": {
+    "se_sgu_1m_bedrock": {
+     "title": "Sweden, SGU bedrock 1:1 000 000",
+     "licence": {
+      "name": "SGU says its open geodata is free of charge and may be used and published freely; no licence name seen",
+      "status": "reported"
+     },
+     "attribution": "Source: SGU"
+    },
+    "fi_gtk_1m_rocktypes": {
+     "title": "Finland, GTK generalised bedrock rock types 1:1 000 000",
+     "licence": {
+      "name": "GTK Open Licence, compatible with CC BY 4.0, valid from 1 December 2025",
+      "status": "reported"
+     },
+     "attribution": "Contains data from the Geological Survey of Finland (GTK), CC BY 4.0 compatible open licence"
+    },
+    "no_ngu_n1350_units": {
+     "title": "Norway, NGU bedrock units 1:1 350 000",
+     "licence": {
+      "name": "NLOD; credit NGU",
+      "status": "reported"
+     },
+     "attribution": "Contains data made available by NGU under NLOD"
+    },
+    "uk_bgs_625k_bedrock": {
+     "title": "Great Britain, BGS Geology 625k bedrock (DiGMapGB-625 v5)",
+     "licence": {
+      "name": "Open Government Licence, as reported by BGS; some catalogue records say licence not set",
+      "status": "reported"
+     },
+     "attribution": "Contains NERC materials (c) NERC [year]"
+    },
+    "ni_gsni_250k_bedrock": {
+     "title": "Northern Ireland, GSNI bedrock polygons 1:250 000",
+     "licence": {
+      "name": "Open Government Licence v3.0 for GSNI data, as reported by Geological Survey Ireland",
+      "status": "reported"
+     },
+     "attribution": "Contains GSNI data under the Open Government Licence v3.0"
+    },
+    "ie_gsi_500k_bedrock": {
+     "title": "Ireland, GSI and GSNI bedrock 1:500 000",
+     "licence": {
+      "name": "CC BY 4.0 for data produced by the Geological Survey Ireland; UK Open Government Licence v3.0 for data produced by GSNI (read from the licence file in the archive)",
+      "status": "verified"
+     },
+     "attribution": "Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence."
+    },
+    "at_geosphere_500k": {
+     "title": "Austria, GeoSphere geological units 1:500 000",
+     "licence": {
+      "name": "CC BY 4.0 for the base map; not stated on the INSPIRE record",
+      "status": "reported"
+     },
+     "attribution": "GeoSphere Austria"
+    }
+   },
+   "relief": true
+  }
+ },
+ "s2s": {
+  "north_sea": {
+   "name": "North Sea: Norway and Britain face to face, Shetland between",
+   "attribution": [
+    "HydroSHEDS: Lehner, B., Grill G. (2013), Hydrological Processes 27(15); https://www.hydrosheds.org",
+    "Geology: the surveys named in geology-map-processing provenance files for no_ngu_n1350_units, se_sgu_1m_bedrock, fi_gtk_1m_rocktypes, pl_pig_1m, uk_bgs_625k_bedrock, ni_gsni_250k_bedrock, ie_gsi_500k_bedrock, at_geosphere_500k, es_igme_1m_units, eu_igme5000",
+    "Terrain: Relief (Copernicus DEM GLO-90, EMODnet Bathymetry)"
+   ],
+   "geology_maps": [
+    "no_ngu_n1350_units",
+    "se_sgu_1m_bedrock",
+    "fi_gtk_1m_rocktypes",
+    "pl_pig_1m",
+    "uk_bgs_625k_bedrock",
+    "ni_gsni_250k_bedrock",
+    "ie_gsi_500k_bedrock",
+    "at_geosphere_500k",
+    "es_igme_1m_units",
+    "eu_igme5000"
+   ],
+   "counts": {
+    "systems": 15,
+    "subbasins": 28,
+    "reaches": 1551,
+    "outlets": 10
+   }
+  },
+  "norwegian_sea": {
+   "name": "Norwegian Sea margin: Norway north of Stad, Sweden and Finland north of 61",
+   "attribution": [
+    "HydroSHEDS: Lehner, B., Grill G. (2013), Hydrological Processes 27(15); https://www.hydrosheds.org",
+    "Geology: the surveys named in geology-map-processing provenance files for no_ngu_n1350_units, se_sgu_1m_bedrock, fi_gtk_1m_rocktypes, pl_pig_1m, uk_bgs_625k_bedrock, ni_gsni_250k_bedrock, ie_gsi_500k_bedrock, at_geosphere_500k, es_igme_1m_units, eu_igme5000",
+    "Terrain: Relief (Copernicus DEM GLO-90, EMODnet Bathymetry)"
+   ],
+   "geology_maps": [
+    "no_ngu_n1350_units",
+    "se_sgu_1m_bedrock",
+    "fi_gtk_1m_rocktypes",
+    "pl_pig_1m",
+    "uk_bgs_625k_bedrock",
+    "ni_gsni_250k_bedrock",
+    "ie_gsi_500k_bedrock",
+    "at_geosphere_500k",
+    "es_igme_1m_units",
+    "eu_igme5000"
+   ],
+   "counts": {
+    "systems": 29,
+    "subbasins": 56,
+    "reaches": 3050,
+    "outlets": 11
+   }
+  },
+  "ne_europe": {
+   "name": "North-east Europe: Britain, Ireland, southern Scandinavia, the Baltic and Poland",
+   "attribution": [
+    "HydroSHEDS: Lehner, B., Grill G. (2013), Hydrological Processes 27(15); https://www.hydrosheds.org",
+    "Geology: the surveys named in geology-map-processing provenance files for no_ngu_n1350_units, se_sgu_1m_bedrock, fi_gtk_1m_rocktypes, pl_pig_1m, uk_bgs_625k_bedrock, ni_gsni_250k_bedrock, ie_gsi_500k_bedrock, at_geosphere_500k, es_igme_1m_units, eu_igme5000",
+    "Terrain: Relief (Copernicus DEM GLO-90, EMODnet Bathymetry)"
+   ],
+   "geology_maps": [
+    "no_ngu_n1350_units",
+    "se_sgu_1m_bedrock",
+    "fi_gtk_1m_rocktypes",
+    "pl_pig_1m",
+    "uk_bgs_625k_bedrock",
+    "ni_gsni_250k_bedrock",
+    "ie_gsi_500k_bedrock",
+    "at_geosphere_500k",
+    "es_igme_1m_units",
+    "eu_igme5000"
+   ],
+   "counts": {
+    "systems": 115,
+    "subbasins": 295,
+    "reaches": 19989,
+    "outlets": 97
+   }
+  }
+ },
+ "relief": {
+  "ne_europe": {
+   "crs": "EPSG:3035",
+   "extent": [
+    3130000,
+    2760000,
+    5400000,
+    4340000
+   ],
+   "attribution": "Relief (github.com/AdmcCarthy/Relief): Copernicus DEM GLO-90 (ESA), EMODnet Bathymetry; Kartverket and MAREANO on the Norwegian Sea frame"
+  },
+  "north_sea": {
+   "crs": "EPSG:25832",
+   "extent": [
+    -140000,
+    6090000,
+    600000,
+    6970000
+   ],
+   "attribution": "Relief (github.com/AdmcCarthy/Relief): Copernicus DEM GLO-90 (ESA), EMODnet Bathymetry; Kartverket and MAREANO on the Norwegian Sea frame"
+  },
+  "norwegian_sea": {
+   "crs": "+proj=lcc +lat_1=62 +lat_2=70 +lat_0=66 +lon_0=8 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs",
+   "extent": [
+    -590000,
+    -510000,
+    480000,
+    490000
+   ],
+   "attribution": "Relief (github.com/AdmcCarthy/Relief): Copernicus DEM GLO-90 (ESA), EMODnet Bathymetry; Kartverket and MAREANO on the Norwegian Sea frame"
+  }
+ },
+ "excluded": {}
+}

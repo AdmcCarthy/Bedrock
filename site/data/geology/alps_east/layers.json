@@ -1,0 +1,660 @@
+{
+ "geology_layers": 1,
+ "region": "alps_east",
+ "name": "Austria",
+ "bbox": [
+  9.0,
+  46.0,
+  17.5,
+  49.5
+ ],
+ "projection": {
+  "type": "conicEqualArea",
+  "parallels": [
+   46.5,
+   49
+  ],
+  "rotate": [
+   -13,
+   0
+  ]
+ },
+ "work_crs": "EPSG:3035",
+ "crs": "EPSG:4258 lon/lat",
+ "built": "2026-11-09T21:46:19+00:00",
+ "levels": {
+  "regional": {
+   "scale": 3000000,
+   "metres_per_px": 793.8,
+   "tolerance_m": 635,
+   "min_unit_m2": 2520474,
+   "maps": [
+    {
+     "map_id": "at_geosphere_500k",
+     "file": "regional__at_geosphere_500k.topojson",
+     "title": "Austria, GeoSphere geological units 1:500 000",
+     "register_id": "geosphere-austria-500k",
+     "source_scale": 500000,
+     "bytes": 651683,
+     "units_in": 4107,
+     "units_in_frame": 4107,
+     "units_out": 1340,
+     "points_in": 413631,
+     "points_out": 35818,
+     "merged": 2767,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Devonian": 209,
+      "Cretaceous": 180,
+      "Paleogene": 180,
+      "Cryogenian": 177,
+      "Pleistocene": 140,
+      "Jurassic": 94,
+      "Permian": 91,
+      "Carboniferous": 91,
+      "Stenian": 35,
+      "Calymmian": 23,
+      "Silurian": 23,
+      "Ectasian": 21,
+      "Triassic": 18,
+      "Ediacaran": 17,
+      "Tonian": 11,
+      "Upper Ordovician": 9,
+      "Ordovician": 7,
+      "Pennsylvanian": 5,
+      "Oligocene": 4,
+      "Neogene": 3,
+      "Miocene": 1,
+      "Holocene": 1
+     },
+     "licence": {
+      "name": "CC BY 4.0 for the base map; not stated on the INSPIRE record",
+      "status": "reported"
+     },
+     "attribution": "GeoSphere Austria",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    }
+   ]
+  },
+  "detail": {
+   "scale": 1000000,
+   "metres_per_px": 264.59999999999997,
+   "tolerance_m": 185,
+   "min_unit_m2": 210039,
+   "maps": [
+    {
+     "map_id": "at_geosphere_500k",
+     "file": "detail__at_geosphere_500k.topojson",
+     "title": "Austria, GeoSphere geological units 1:500 000",
+     "register_id": "geosphere-austria-500k",
+     "source_scale": 500000,
+     "bytes": 2345006,
+     "units_in": 4107,
+     "units_in_frame": 4107,
+     "units_out": 3845,
+     "points_in": 413631,
+     "points_out": 128313,
+     "merged": 262,
+     "dropped": 0,
+     "coverage_valid_after_simplify": true,
+     "all_valid": true,
+     "chart_intervals": {
+      "Devonian": 632,
+      "Cryogenian": 590,
+      "Cretaceous": 561,
+      "Paleogene": 309,
+      "Jurassic": 301,
+      "Permian": 288,
+      "Carboniferous": 254,
+      "Pleistocene": 241,
+      "Silurian": 197,
+      "Upper Ordovician": 69,
+      "Stenian": 66,
+      "Triassic": 49,
+      "Tonian": 49,
+      "Ectasian": 43,
+      "Ediacaran": 39,
+      "Calymmian": 37,
+      "Neogene": 32,
+      "Holocene": 25,
+      "Ordovician": 24,
+      "Oligocene": 22,
+      "Pennsylvanian": 12,
+      "Miocene": 5
+     },
+     "licence": {
+      "name": "CC BY 4.0 for the base map; not stated on the INSPIRE record",
+      "status": "reported"
+     },
+     "attribution": "GeoSphere Austria",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    }
+   ]
+  }
+ },
+ "chart": {
+  "Phanerozoic": {
+   "hex": "#9ad9dd",
+   "start_ma": 538.8,
+   "end_ma": 0.0,
+   "rank": "eon"
+  },
+  "Cenozoic": {
+   "hex": "#f2f91d",
+   "start_ma": 66.0,
+   "end_ma": 0.0,
+   "rank": "era"
+  },
+  "Quaternary": {
+   "hex": "#f9f97f",
+   "start_ma": 2.58,
+   "end_ma": 0.0,
+   "rank": "period"
+  },
+  "Holocene": {
+   "hex": "#fef2ec",
+   "start_ma": 0.0117,
+   "end_ma": 0.0,
+   "rank": "epoch"
+  },
+  "Pleistocene": {
+   "hex": "#fff2ae",
+   "start_ma": 2.58,
+   "end_ma": 0.0117,
+   "rank": "epoch"
+  },
+  "Neogene": {
+   "hex": "#ffe619",
+   "start_ma": 23.03,
+   "end_ma": 2.58,
+   "rank": "period"
+  },
+  "Pliocene": {
+   "hex": "#ffff99",
+   "start_ma": 5.333,
+   "end_ma": 2.58,
+   "rank": "epoch"
+  },
+  "Miocene": {
+   "hex": "#ffff00",
+   "start_ma": 23.03,
+   "end_ma": 5.333,
+   "rank": "epoch"
+  },
+  "Paleogene": {
+   "hex": "#fd9a52",
+   "start_ma": 66.0,
+   "end_ma": 23.03,
+   "rank": "period"
+  },
+  "Oligocene": {
+   "hex": "#fdc07a",
+   "start_ma": 33.9,
+   "end_ma": 23.03,
+   "rank": "epoch"
+  },
+  "Eocene": {
+   "hex": "#fdb46c",
+   "start_ma": 56.0,
+   "end_ma": 33.9,
+   "rank": "epoch"
+  },
+  "Paleocene": {
+   "hex": "#fda75f",
+   "start_ma": 66.0,
+   "end_ma": 56.0,
+   "rank": "epoch"
+  },
+  "Mesozoic": {
+   "hex": "#67c5ca",
+   "start_ma": 251.902,
+   "end_ma": 66.0,
+   "rank": "era"
+  },
+  "Cretaceous": {
+   "hex": "#7fc64e",
+   "start_ma": 145.0,
+   "end_ma": 66.0,
+   "rank": "period"
+  },
+  "Upper Cretaceous": {
+   "hex": "#a6d84a",
+   "start_ma": 100.5,
+   "end_ma": 66.0,
+   "rank": "epoch"
+  },
+  "Lower Cretaceous": {
+   "hex": "#8ccd57",
+   "start_ma": 145.0,
+   "end_ma": 100.5,
+   "rank": "epoch"
+  },
+  "Jurassic": {
+   "hex": "#34b2c9",
+   "start_ma": 201.4,
+   "end_ma": 145.0,
+   "rank": "period"
+  },
+  "Upper Jurassic": {
+   "hex": "#b3e3ee",
+   "start_ma": 161.5,
+   "end_ma": 145.0,
+   "rank": "epoch"
+  },
+  "Middle Jurassic": {
+   "hex": "#80cfd8",
+   "start_ma": 174.7,
+   "end_ma": 161.5,
+   "rank": "epoch"
+  },
+  "Lower Jurassic": {
+   "hex": "#42aed0",
+   "start_ma": 201.4,
+   "end_ma": 174.7,
+   "rank": "epoch"
+  },
+  "Triassic": {
+   "hex": "#812b92",
+   "start_ma": 251.902,
+   "end_ma": 201.4,
+   "rank": "period"
+  },
+  "Upper Triassic": {
+   "hex": "#bd8cc3",
+   "start_ma": 237.0,
+   "end_ma": 201.4,
+   "rank": "epoch"
+  },
+  "Middle Triassic": {
+   "hex": "#b168b1",
+   "start_ma": 247.2,
+   "end_ma": 237.0,
+   "rank": "epoch"
+  },
+  "Lower Triassic": {
+   "hex": "#a4469f",
+   "start_ma": 251.902,
+   "end_ma": 247.2,
+   "rank": "epoch"
+  },
+  "Paleozoic": {
+   "hex": "#99c08d",
+   "start_ma": 538.8,
+   "end_ma": 251.902,
+   "rank": "era"
+  },
+  "Permian": {
+   "hex": "#f04028",
+   "start_ma": 298.9,
+   "end_ma": 251.902,
+   "rank": "period"
+  },
+  "Lopingian": {
+   "hex": "#fba794",
+   "start_ma": 259.51,
+   "end_ma": 251.902,
+   "rank": "epoch"
+  },
+  "Guadalupian": {
+   "hex": "#fb745c",
+   "start_ma": 273.01,
+   "end_ma": 259.51,
+   "rank": "epoch"
+  },
+  "Cisuralian": {
+   "hex": "#ef5845",
+   "start_ma": 298.9,
+   "end_ma": 273.01,
+   "rank": "epoch"
+  },
+  "Carboniferous": {
+   "hex": "#67a599",
+   "start_ma": 358.9,
+   "end_ma": 298.9,
+   "rank": "period"
+  },
+  "Pennsylvanian": {
+   "hex": "#99c2b5",
+   "start_ma": 323.2,
+   "end_ma": 298.9,
+   "rank": "subperiod"
+  },
+  "Mississippian": {
+   "hex": "#678f66",
+   "start_ma": 358.9,
+   "end_ma": 323.2,
+   "rank": "subperiod"
+  },
+  "Devonian": {
+   "hex": "#cb8c37",
+   "start_ma": 419.2,
+   "end_ma": 358.9,
+   "rank": "period"
+  },
+  "Upper Devonian": {
+   "hex": "#f1e19d",
+   "start_ma": 382.7,
+   "end_ma": 358.9,
+   "rank": "epoch"
+  },
+  "Middle Devonian": {
+   "hex": "#f1c868",
+   "start_ma": 393.3,
+   "end_ma": 382.7,
+   "rank": "epoch"
+  },
+  "Lower Devonian": {
+   "hex": "#e5ac4d",
+   "start_ma": 419.2,
+   "end_ma": 393.3,
+   "rank": "epoch"
+  },
+  "Silurian": {
+   "hex": "#b3e1b6",
+   "start_ma": 443.8,
+   "end_ma": 419.2,
+   "rank": "period"
+  },
+  "Pridoli": {
+   "hex": "#e6f5e1",
+   "start_ma": 423.0,
+   "end_ma": 419.2,
+   "rank": "epoch"
+  },
+  "Ludlow": {
+   "hex": "#bfe6cf",
+   "start_ma": 427.4,
+   "end_ma": 423.0,
+   "rank": "epoch"
+  },
+  "Wenlock": {
+   "hex": "#b3e1c2",
+   "start_ma": 433.4,
+   "end_ma": 427.4,
+   "rank": "epoch"
+  },
+  "Llandovery": {
+   "hex": "#99d7b3",
+   "start_ma": 443.8,
+   "end_ma": 433.4,
+   "rank": "epoch"
+  },
+  "Ordovician": {
+   "hex": "#009270",
+   "start_ma": 485.4,
+   "end_ma": 443.8,
+   "rank": "period"
+  },
+  "Upper Ordovician": {
+   "hex": "#7fca93",
+   "start_ma": 458.4,
+   "end_ma": 443.8,
+   "rank": "epoch"
+  },
+  "Middle Ordovician": {
+   "hex": "#4db47e",
+   "start_ma": 470.0,
+   "end_ma": 458.4,
+   "rank": "epoch"
+  },
+  "Lower Ordovician": {
+   "hex": "#1a9d6f",
+   "start_ma": 485.4,
+   "end_ma": 470.0,
+   "rank": "epoch"
+  },
+  "Cambrian": {
+   "hex": "#7fa056",
+   "start_ma": 538.8,
+   "end_ma": 485.4,
+   "rank": "period"
+  },
+  "Furongian": {
+   "hex": "#b3e095",
+   "start_ma": 497.0,
+   "end_ma": 485.4,
+   "rank": "epoch"
+  },
+  "Miaolingian": {
+   "hex": "#a6cf86",
+   "start_ma": 509.0,
+   "end_ma": 497.0,
+   "rank": "epoch"
+  },
+  "Cambrian Series 2": {
+   "hex": "#99c078",
+   "start_ma": 521.0,
+   "end_ma": 509.0,
+   "rank": "epoch"
+  },
+  "Terreneuvian": {
+   "hex": "#8cb06c",
+   "start_ma": 538.8,
+   "end_ma": 521.0,
+   "rank": "epoch"
+  },
+  "Precambrian": {
+   "hex": "#f74370",
+   "start_ma": 4567.0,
+   "end_ma": 538.8,
+   "rank": "supereon"
+  },
+  "Proterozoic": {
+   "hex": "#f73563",
+   "start_ma": 2500.0,
+   "end_ma": 538.8,
+   "rank": "eon"
+  },
+  "Neoproterozoic": {
+   "hex": "#feb342",
+   "start_ma": 1000.0,
+   "end_ma": 538.8,
+   "rank": "era"
+  },
+  "Ediacaran": {
+   "hex": "#fed96a",
+   "start_ma": 635.0,
+   "end_ma": 538.8,
+   "rank": "period"
+  },
+  "Cryogenian": {
+   "hex": "#fecc5c",
+   "start_ma": 720.0,
+   "end_ma": 635.0,
+   "rank": "period"
+  },
+  "Tonian": {
+   "hex": "#febf4e",
+   "start_ma": 1000.0,
+   "end_ma": 720.0,
+   "rank": "period"
+  },
+  "Mesoproterozoic": {
+   "hex": "#fdb462",
+   "start_ma": 1600.0,
+   "end_ma": 1000.0,
+   "rank": "era"
+  },
+  "Stenian": {
+   "hex": "#fed99a",
+   "start_ma": 1200.0,
+   "end_ma": 1000.0,
+   "rank": "period"
+  },
+  "Ectasian": {
+   "hex": "#fdcc8a",
+   "start_ma": 1400.0,
+   "end_ma": 1200.0,
+   "rank": "period"
+  },
+  "Calymmian": {
+   "hex": "#fdc07a",
+   "start_ma": 1600.0,
+   "end_ma": 1400.0,
+   "rank": "period"
+  },
+  "Paleoproterozoic": {
+   "hex": "#f74370",
+   "start_ma": 2500.0,
+   "end_ma": 1600.0,
+   "rank": "era"
+  },
+  "Statherian": {
+   "hex": "#f875a7",
+   "start_ma": 1800.0,
+   "end_ma": 1600.0,
+   "rank": "period"
+  },
+  "Orosirian": {
+   "hex": "#f76898",
+   "start_ma": 2050.0,
+   "end_ma": 1800.0,
+   "rank": "period"
+  },
+  "Rhyacian": {
+   "hex": "#f75b89",
+   "start_ma": 2300.0,
+   "end_ma": 2050.0,
+   "rank": "period"
+  },
+  "Siderian": {
+   "hex": "#f74f7c",
+   "start_ma": 2500.0,
+   "end_ma": 2300.0,
+   "rank": "period"
+  },
+  "Archean": {
+   "hex": "#f0047f",
+   "start_ma": 4031.0,
+   "end_ma": 2500.0,
+   "rank": "eon"
+  },
+  "Neoarchean": {
+   "hex": "#f99bc1",
+   "start_ma": 2800.0,
+   "end_ma": 2500.0,
+   "rank": "era"
+  },
+  "Mesoarchean": {
+   "hex": "#f768a9",
+   "start_ma": 3200.0,
+   "end_ma": 2800.0,
+   "rank": "era"
+  },
+  "Paleoarchean": {
+   "hex": "#f4449f",
+   "start_ma": 3600.0,
+   "end_ma": 3200.0,
+   "rank": "era"
+  },
+  "Eoarchean": {
+   "hex": "#da037f",
+   "start_ma": 4031.0,
+   "end_ma": 3600.0,
+   "rank": "era"
+  },
+  "Hadean": {
+   "hex": "#ae027e",
+   "start_ma": 4567.0,
+   "end_ma": 4031.0,
+   "rank": "eon"
+  }
+ },
+ "lithology": {
+  "unconsolidated": {
+   "label": "Unconsolidated deposits",
+   "group": "surficial",
+   "hex": "#efe6cf"
+  },
+  "clastic": {
+   "label": "Clastic sedimentary rocks",
+   "group": "sedimentary",
+   "hex": "#d9b26f"
+  },
+  "carbonate": {
+   "label": "Carbonate rocks",
+   "group": "sedimentary",
+   "hex": "#9fc5e8"
+  },
+  "evaporite": {
+   "label": "Evaporites",
+   "group": "sedimentary",
+   "hex": "#e6c2e0"
+  },
+  "sedimentary_undiff": {
+   "label": "Sedimentary rocks, undifferentiated",
+   "group": "sedimentary",
+   "hex": "#c9a86a"
+  },
+  "volcanic_felsic": {
+   "label": "Felsic and intermediate volcanic rocks",
+   "group": "igneous",
+   "hex": "#e9967a"
+  },
+  "volcanic_mafic": {
+   "label": "Mafic volcanic rocks",
+   "group": "igneous",
+   "hex": "#8b3a3a"
+  },
+  "plutonic_felsic": {
+   "label": "Granitoids and felsic igneous rocks",
+   "group": "igneous",
+   "hex": "#e76f51"
+  },
+  "plutonic_mafic": {
+   "label": "Mafic and ultramafic rocks, mainly intrusive",
+   "group": "igneous",
+   "hex": "#5c3d2e"
+  },
+  "igneous_undiff": {
+   "label": "Igneous rocks, undifferentiated",
+   "group": "igneous",
+   "hex": "#c25a4a"
+  },
+  "gneiss": {
+   "label": "Gneiss, migmatite and granulite",
+   "group": "metamorphic",
+   "hex": "#7b8fb5"
+  },
+  "schist": {
+   "label": "Schist, phyllite and slate",
+   "group": "metamorphic",
+   "hex": "#9aa6c4"
+  },
+  "quartzite": {
+   "label": "Quartzite",
+   "group": "metamorphic",
+   "hex": "#cfd8e8"
+  },
+  "amphibolite": {
+   "label": "Amphibolite, greenstone and metavolcanic rocks",
+   "group": "metamorphic",
+   "hex": "#4f7369"
+  },
+  "marble": {
+   "label": "Marble",
+   "group": "metamorphic",
+   "hex": "#dfe8f0"
+  },
+  "metamorphic_undiff": {
+   "label": "Metamorphic rocks, undifferentiated",
+   "group": "metamorphic",
+   "hex": "#6b7fa3"
+  },
+  "ice_water": {
+   "label": "Ice, water and non-geological",
+   "group": "other",
+   "hex": "#f2f6fa"
+  },
+  "unknown": {
+   "label": "Not classified",
+   "group": "other",
+   "hex": "#d9d9d9"
+  }
+ },
+ "attribution": [
+  "GeoSphere Austria"
+ ]
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source to sink</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+</head>
+<body class="map-page">
+<header class="bar">
+  <span class="crumb"><a href="index.html">Bedrock</a> /</span>
+  <h1 id="title">Loading</h1>
+  <div class="controls"><span id="modes"></span></div>
+</header>
+<section class="stage" id="stage">
+  <canvas id="map"></canvas>
+  <div class="legend" id="legend"></div>
+  <div class="tip" id="tip"></div>
+</section>
+<footer class="strip" id="strip"></footer>
+<script type="module" src="s2s.js"></script>
+</body>
+</html>

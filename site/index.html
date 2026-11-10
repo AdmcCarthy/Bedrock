@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bedrock</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Bedrock, read into one language</h1>
+  <p class="lede">Open geological maps of Norway, Sweden, Finland, Britain, Ireland and Austria, standardised to ETRS89, given a chart age and a bedrock class, generalised by level of detail with shared boundaries kept whole, and drawn with D3 on Relief terrain. Below them, the catchments that erode that bedrock, with what they are made of, how much sediment they can deliver and how clean the sand should be. Every page carries its sources and licences.</p>
+  <p class="lede">Views on a bedrock page: age (chart colours, or a vintage or paper palette), lithology, age with rock as hatch, rock with age as tone, age alone on the fjord ramp; plain or vintage frame; hillshade strength where the region sits on a Relief frame; the level of detail by scale. Views on a catchment page: bedrock group, sand quality, yield, sand supply, shield and carbonate shares, size classes with a fold for small catchments; rivers, flow lines or slope flow; strong or subtle ink.</p>
+</header>
+<main>
+  <h2 class="sec">Bedrock maps</h2>
+  <div id="geology" class="gallery"></div>
+  <h2 class="sec">Source to sink</h2>
+  <div id="s2s" class="gallery"></div>
+</main>
+<footer class="foot">
+  <p>Colours by age follow the International Chronostratigraphic Chart (CGMW); the vintage and paper palettes are this project's own. Lithology classes and chart ages are read from each survey's own words; a unit spanning a chart boundary is coloured by the period at the middle of its span and says so on hover. Catchments and rivers from HydroSHEDS (Lehner and Grill 2013). Terrain from Relief: Copernicus DEM GLO-90 (ESA) and EMODnet Bathymetry. The pipelines are private; this site holds only the display layers listed in <code>manifest.json</code>, with each source's terms in DATA-LICENCE.md.</p>
+</footer>
+<script type="module">
+  const man = await (await fetch("manifest.json")).json();
+  const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const g = document.getElementById("geology");
+  for (const [id, r] of Object.entries(man.geology)) {
+    const a = document.createElement("a"); a.className = "card"; a.href = `geology.html?r=${id}`;
+    const maps = Object.values(r.maps).map(m => m.title.split(",")[0]);
+    a.innerHTML = `<img src="shots/geology_${id}${dark ? "_dark" : ""}.webp" alt="" onerror="this.style.display='none'"><h2>${r.name}</h2><p>${[...new Set(maps)].join(", ")}</p><p class="meta">${r.levels.join(" · ")}${r.relief ? " · on Relief terrain" : ""}</p>`;
+    g.appendChild(a);
+  }
+  const s = document.getElementById("s2s");
+  for (const [id, r] of Object.entries(man.s2s)) {
+    const a = document.createElement("a"); a.className = "card"; a.href = `s2s.html?r=${id}`;
+    a.innerHTML = `<img src="shots/s2s_${id}${dark ? "_dark" : ""}.webp" alt="" onerror="this.style.display='none'"><h2>${r.name}</h2><p>${r.counts.systems} catchments, ${r.counts.reaches} flow lines</p><p class="meta">on Relief terrain</p>`;
+    s.appendChild(a);
+  }
+</script>
+</body>
+</html>

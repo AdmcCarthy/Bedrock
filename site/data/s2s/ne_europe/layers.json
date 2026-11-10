@@ -1,0 +1,300 @@
+{
+ "s2s_layers": 1,
+ "region": "ne_europe",
+ "name": "North-east Europe: Britain, Ireland, southern Scandinavia, the Baltic and Poland",
+ "crs": "EPSG:3035",
+ "extent": [
+  3130000,
+  2760000,
+  5400000,
+  4340000
+ ],
+ "bbox": [
+  -12.018,
+  46.801,
+  30.063,
+  62.172
+ ],
+ "relief": {
+  "region": "ne_europe",
+  "level": "regional",
+  "hillshade": "relief/ne_europe/regional_hillshade.png",
+  "bands": "relief/ne_europe/regional.geojson",
+  "shape": [
+   790,
+   1135
+  ],
+  "attribution": "Relief: Copernicus DEM GLO-90 (ESA), EMODnet Bathymetry; see Relief/docs/sources.md"
+ },
+ "files": {
+  "systems": "systems.topojson",
+  "subbasins": "subbasins.topojson",
+  "rivers": "rivers.topojson",
+  "outlets": "outlets.geojson"
+ },
+ "bytes": {
+  "systems": 824583,
+  "subbasins": 1052720,
+  "rivers": 4556540,
+  "outlets": 23790
+ },
+ "counts": {
+  "systems": 115,
+  "subbasins": 295,
+  "reaches": 19989,
+  "outlets": 97
+ },
+ "clusters": {
+  "0": {
+   "name": "Carbonates, mainly Paleozoic",
+   "n_systems": 8,
+   "mean": {
+    "frac_igneous_felsic": 0.0,
+    "frac_igneous_mafic": 0.002,
+    "frac_gneiss_quartzite": 0.0,
+    "frac_schist": 0.0,
+    "frac_clastic": 0.087,
+    "frac_carbonate": 0.833,
+    "frac_unconsolidated": 0.019,
+    "age_Cenozoic": 0.086,
+    "age_Mesozoic": 0.044,
+    "age_Paleozoic": 0.444,
+    "age_Neoproterozoic": 0.001,
+    "age_Older_Proterozoic": 0.0,
+    "age_Archean": 0.0
+   }
+  },
+  "1": {
+   "name": "Granite and felsic volcanics, mainly older Proterozoic",
+   "n_systems": 33,
+   "mean": {
+    "frac_igneous_felsic": 0.657,
+    "frac_igneous_mafic": 0.051,
+    "frac_gneiss_quartzite": 0.103,
+    "frac_schist": 0.103,
+    "frac_clastic": 0.064,
+    "frac_carbonate": 0.015,
+    "frac_unconsolidated": 0.001,
+    "age_Cenozoic": 0.001,
+    "age_Mesozoic": 0.012,
+    "age_Paleozoic": 0.054,
+    "age_Neoproterozoic": 0.064,
+    "age_Older_Proterozoic": 0.801,
+    "age_Archean": 0.0
+   }
+  },
+  "2": {
+   "name": "Clastic sedimentary rocks, mainly Paleozoic",
+   "n_systems": 30,
+   "mean": {
+    "frac_igneous_felsic": 0.044,
+    "frac_igneous_mafic": 0.037,
+    "frac_gneiss_quartzite": 0.031,
+    "frac_schist": 0.032,
+    "frac_clastic": 0.586,
+    "frac_carbonate": 0.125,
+    "frac_unconsolidated": 0.049,
+    "age_Cenozoic": 0.011,
+    "age_Mesozoic": 0.018,
+    "age_Paleozoic": 0.758,
+    "age_Neoproterozoic": 0.109,
+    "age_Older_Proterozoic": 0.011,
+    "age_Archean": 0.0
+   }
+  },
+  "3": {
+   "name": "Unconsolidated cover, mainly Cenozoic",
+   "n_systems": 26,
+   "mean": {
+    "frac_igneous_felsic": 0.018,
+    "frac_igneous_mafic": 0.001,
+    "frac_gneiss_quartzite": 0.002,
+    "frac_schist": 0.008,
+    "frac_clastic": 0.057,
+    "frac_carbonate": 0.073,
+    "frac_unconsolidated": 0.523,
+    "age_Cenozoic": 0.857,
+    "age_Mesozoic": 0.014,
+    "age_Paleozoic": 0.014,
+    "age_Neoproterozoic": 0.004,
+    "age_Older_Proterozoic": 0.016,
+    "age_Archean": 0.0
+   }
+  },
+  "4": {
+   "name": "Clastic sedimentary rocks with carbonates, mainly Mesozoic and Cenozoic",
+   "n_systems": 26,
+   "mean": {
+    "frac_igneous_felsic": 0.048,
+    "frac_igneous_mafic": 0.067,
+    "frac_gneiss_quartzite": 0.027,
+    "frac_schist": 0.024,
+    "frac_clastic": 0.365,
+    "frac_carbonate": 0.258,
+    "frac_unconsolidated": 0.103,
+    "age_Cenozoic": 0.227,
+    "age_Mesozoic": 0.372,
+    "age_Paleozoic": 0.183,
+    "age_Neoproterozoic": 0.01,
+    "age_Older_Proterozoic": 0.013,
+    "age_Archean": 0.0
+   }
+  }
+ },
+ "features": [
+  "frac_igneous_felsic",
+  "frac_igneous_mafic",
+  "frac_gneiss_quartzite",
+  "frac_schist",
+  "frac_clastic",
+  "frac_carbonate",
+  "frac_unconsolidated",
+  "frac_other",
+  "age_Cenozoic",
+  "age_Mesozoic",
+  "age_Paleozoic",
+  "age_Neoproterozoic",
+  "age_Older_Proterozoic",
+  "age_Archean",
+  "age_unread"
+ ],
+ "size_classes": {
+  "10,000 to 100,000 km2": 56,
+  "1,000 to 10,000 km2": 55,
+  "over 100,000 km2": 8,
+  "under 1,000 km2": 4
+ },
+ "geology_maps": [
+  "no_ngu_n1350_units",
+  "se_sgu_1m_bedrock",
+  "fi_gtk_1m_rocktypes",
+  "pl_pig_1m",
+  "uk_bgs_625k_bedrock",
+  "ni_gsni_250k_bedrock",
+  "ie_gsi_500k_bedrock",
+  "at_geosphere_500k",
+  "es_igme_1m_units",
+  "eu_igme5000"
+ ],
+ "sinks": [
+  {
+   "name": "North Sea",
+   "lon": 3.0,
+   "lat": 56.5
+  },
+  {
+   "name": "Norwegian Sea",
+   "lon": 3.0,
+   "lat": 63.5
+  },
+  {
+   "name": "Baltic Sea",
+   "lon": 19.5,
+   "lat": 57.5
+  },
+  {
+   "name": "Atlantic",
+   "lon": -11.0,
+   "lat": 52.5
+  },
+  {
+   "name": "Celtic Sea",
+   "lon": -7.5,
+   "lat": 50.3
+  }
+ ],
+ "attribution": [
+  "HydroSHEDS: Lehner, B., Grill G. (2013), Hydrological Processes 27(15); https://www.hydrosheds.org",
+  "Geology: the surveys named in geology-map-processing provenance files for no_ngu_n1350_units, se_sgu_1m_bedrock, fi_gtk_1m_rocktypes, pl_pig_1m, uk_bgs_625k_bedrock, ni_gsni_250k_bedrock, ie_gsi_500k_bedrock, at_geosphere_500k, es_igme_1m_units, eu_igme5000",
+  "Terrain: Relief (Copernicus DEM GLO-90, EMODnet Bathymetry)"
+ ],
+ "basis": "Observed: HydroSHEDS drainage (HydroBASINS, HydroRIVERS), the surveys' bedrock maps, Relief terrain and climate zones. Derived: area fractions of class, era and grain per catchment, named indices, k-means groups, the BQART budget and the sand quality and sand share proxies (docs/SAND_QUALITY.md, docs/BUDGET.md). Interpreted: the glauconite-prone flag and the reading in docs/CONCEPT.md.",
+ "built": "2026-11-10T07:58:03+00:00",
+ "budget": {
+  "catchments": 123,
+  "total_qs_mt_yr": 70.45517825944428,
+  "total_sand_mt_yr": 38.76921022938096,
+  "median_yield_t_km2_yr": 11.788428659910597,
+  "glauconite_prone": 55,
+  "calibration_factor": 5.039760057768802,
+  "calibration_basis": "median of 6 monitored rivers in this frame (Rhine, Elbe, Vistula, Glomma, Oder, Seine)",
+  "total_qs_cal_mt_yr": 13.979867583346053,
+  "total_sand_cal_mt_yr": 7.692669846378526
+ },
+ "checks": [
+  {
+   "river": "Rhine",
+   "known_mt_yr": 1.0,
+   "model_mt_yr": 9.030545059063197,
+   "ratio_model_over_known": 9.030545059063197,
+   "q_source": "HydroRIVERS mouth reach",
+   "relief_km": 1.149,
+   "temp_c": 7.744710316771689,
+   "L": 1.2437303694604662,
+   "basis": "about 1 Mt/yr at the German-Dutch border today, near a natural baseline of about 1 Mt/yr (Hoffmann and others 2023, Earth Surface Dynamics)"
+  },
+  {
+   "river": "Elbe",
+   "known_mt_yr": 0.6,
+   "model_mt_yr": 4.8102994474641685,
+   "ratio_model_over_known": 8.017165745773614,
+   "q_source": "HydroRIVERS mouth reach",
+   "relief_km": 1.3645,
+   "temp_c": 5.20375124282557,
+   "L": 1.3746960365249978,
+   "basis": "order 0.5 to 0.8 Mt/yr from German monitoring (BfG), figure from memory, to be checked"
+  },
+  {
+   "river": "Vistula",
+   "known_mt_yr": 1.5,
+   "model_mt_yr": 3.900715675783499,
+   "ratio_model_over_known": 2.600477117188999,
+   "q_source": "HydroRIVERS mouth reach",
+   "relief_km": 2.098,
+   "temp_c": 0.9987330046895753,
+   "L": 1.8074346805462442,
+   "basis": "order 1 to 1.6 Mt/yr to the Baltic, figure from memory (HELCOM), to be checked"
+  },
+  {
+   "river": "Glomma",
+   "known_mt_yr": 0.4,
+   "model_mt_yr": 0.7469372547362858,
+   "ratio_model_over_known": 1.8673431368407145,
+   "q_source": "HydroRIVERS mouth reach",
+   "relief_km": 2.0645,
+   "temp_c": 0.4682014708967037,
+   "L": 0.8775844051769587,
+   "basis": "order 0.3 to 0.6 Mt/yr (Bogen, NVE), figure from memory, to be checked"
+  },
+  {
+   "river": "Oder",
+   "known_mt_yr": 0.3,
+   "model_mt_yr": 2.243712899504582,
+   "ratio_model_over_known": 7.479042998348606,
+   "q_source": "HydroRIVERS mouth reach",
+   "relief_km": 1.2945,
+   "temp_c": 2.7369828115253387,
+   "L": 1.743994584857599,
+   "basis": "order 0.2 to 0.4 Mt/yr, figure from memory, to be checked"
+  },
+  {
+   "river": "Seine",
+   "known_mt_yr": 0.7,
+   "model_mt_yr": 1.6734479588665887,
+   "ratio_model_over_known": 2.390639941237984,
+   "q_source": "HydroRIVERS mouth reach",
+   "relief_km": 0.445,
+   "temp_c": 8.5,
+   "L": 1.2474961856431217,
+   "basis": "order 0.5 to 0.9 Mt/yr (French export to the sea studies), figure from memory, to be checked"
+  }
+ ],
+ "slope_flow": {
+  "file": "slope_flow.geojson",
+  "lines": 12265,
+  "bytes": 17663512,
+  "gradient_p50": 0.001676715984906289,
+  "gradient_p90": 0.007317096647166181
+ },
+ "budget_recipe": "Sediment budget per catchment with BQART (Syvitski and Milliman 2007), a sand quality proxy and a sand supply proxy."
+}

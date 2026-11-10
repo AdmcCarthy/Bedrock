@@ -1,0 +1,1013 @@
+{
+ "geology_layers": 1,
+ "region": "uk_ireland",
+ "name": "Britain and Ireland",
+ "bbox": [
+  -11.0,
+  49.5,
+  2.5,
+  61.0
+ ],
+ "projection": {
+  "type": "conicEqualArea",
+  "parallels": [
+   52,
+   58
+  ],
+  "rotate": [
+   4,
+   0
+  ]
+ },
+ "work_crs": "EPSG:3035",
+ "crs": "EPSG:4258 lon/lat",
+ "built": "2026-11-09T22:40:24+00:00",
+ "levels": {
+  "overview": {
+   "scale": 10000000,
+   "metres_per_px": 2646.0,
+   "tolerance_m": 2117,
+   "min_unit_m2": 42007896,
+   "budget_mb": 1.5,
+   "maps": [
+    {
+     "map_id": "uk_bgs_625k_bedrock",
+     "file": "overview__uk_bgs_625k_bedrock.topojson",
+     "title": "Great Britain, BGS Geology 625k bedrock (DiGMapGB-625 v5)",
+     "register_id": "bgs-geology-625k",
+     "source_scale": 625000,
+     "bytes": 355703,
+     "over_budget": false,
+     "units_in": 11244,
+     "units_in_frame": 11244,
+     "units_out": 710,
+     "points_in": 770233,
+     "points_out": 26606,
+     "merged": 8487,
+     "dropped": 2047,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Tonian": 173,
+      "Devonian": 112,
+      "Mississippian": 51,
+      "Triassic": 45,
+      "Carboniferous": 41,
+      "Permian": 32,
+      "Pennsylvanian": 26,
+      "Upper Ordovician": 24,
+      "Ordovician": 22,
+      "Silurian": 22,
+      "Paleogene": 18,
+      "Jurassic": 17,
+      "Cretaceous": 16,
+      "Ludlow": 14,
+      "Cambrian": 12,
+      "Upper Jurassic": 10,
+      "Eocene": 10,
+      "Lower Cretaceous": 9,
+      "Lower Devonian": 8,
+      "Upper Cretaceous": 7,
+      "Middle Ordovician": 5,
+      "Pridoli": 5,
+      "Orosirian": 3,
+      "Oligocene": 3,
+      "Middle Jurassic": 3,
+      "Neogene": 3,
+      "Lower Ordovician": 2,
+      "Holocene": 2
+     },
+     "licence": {
+      "name": "Open Government Licence, as reported by BGS; some catalogue records say licence not set",
+      "status": "reported"
+     },
+     "attribution": "Contains NERC materials (c) NERC [year]",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "ie_gsi_500k_bedrock",
+     "file": "overview__ie_gsi_500k_bedrock.topojson",
+     "title": "Ireland, GSI and GSNI bedrock 1:500 000",
+     "register_id": "gsi-bedrock-500k",
+     "source_scale": 500000,
+     "bytes": 845163,
+     "over_budget": false,
+     "units_in": 3257,
+     "units_in_frame": 3257,
+     "units_out": 684,
+     "points_in": 446518,
+     "points_out": 56588,
+     "merged": 1980,
+     "dropped": 593,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Mississippian": 373,
+      "Upper Ordovician": 92,
+      "Tonian": 80,
+      "Silurian": 34,
+      "Carboniferous": 32,
+      "Middle Ordovician": 13,
+      "Pennsylvanian": 12,
+      "Devonian": 11,
+      "Cambrian": 8,
+      "Paleocene": 8,
+      "Middle Devonian": 6,
+      "Upper Devonian": 5,
+      "Triassic": 4,
+      "Paleogene": 2,
+      "Oligocene": 2,
+      "Upper Cretaceous": 1,
+      "Ordovician": 1
+     },
+     "licence": {
+      "name": "CC BY 4.0 for data produced by the Geological Survey Ireland; UK Open Government Licence v3.0 for data produced by GSNI (read from the licence file in the archive)",
+      "status": "verified"
+     },
+     "attribution": "Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence.",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "ni_gsni_250k_bedrock",
+     "file": "overview__ni_gsni_250k_bedrock.topojson",
+     "title": "Northern Ireland, GSNI bedrock polygons 1:250 000",
+     "register_id": "gsni-250k",
+     "source_scale": 250000,
+     "bytes": 211547,
+     "over_budget": false,
+     "units_in": 4840,
+     "units_in_frame": 4840,
+     "units_out": 425,
+     "points_in": 105883,
+     "points_out": 11886,
+     "merged": 4265,
+     "dropped": 150,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Paleogene": 223,
+      "Mississippian": 46,
+      "Paleocene": 42,
+      "Tonian": 41,
+      "Silurian": 20,
+      "Ordovician": 14,
+      "Cretaceous": 8,
+      "Rhyacian": 8,
+      "Triassic": 7,
+      "Lower Devonian": 5,
+      "Devonian": 5,
+      "Upper Devonian": 3,
+      "Oligocene": 2,
+      "Holocene": 1
+     },
+     "licence": {
+      "name": "Open Government Licence v3.0 for GSNI data, as reported by Geological Survey Ireland",
+      "status": "reported"
+     },
+     "attribution": "Contains GSNI data under the Open Government Licence v3.0",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    }
+   ]
+  },
+  "regional": {
+   "scale": 3000000,
+   "metres_per_px": 793.8,
+   "tolerance_m": 635,
+   "min_unit_m2": 2520474,
+   "budget_mb": 4,
+   "maps": [
+    {
+     "map_id": "uk_bgs_625k_bedrock",
+     "file": "regional__uk_bgs_625k_bedrock.topojson",
+     "title": "Great Britain, BGS Geology 625k bedrock (DiGMapGB-625 v5)",
+     "register_id": "bgs-geology-625k",
+     "source_scale": 625000,
+     "bytes": 1658366,
+     "over_budget": false,
+     "units_in": 11244,
+     "units_in_frame": 11244,
+     "units_out": 3555,
+     "points_in": 770233,
+     "points_out": 98028,
+     "merged": 5751,
+     "dropped": 1938,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Tonian": 752,
+      "Devonian": 477,
+      "Carboniferous": 280,
+      "Mississippian": 240,
+      "Ordovician": 225,
+      "Permian": 166,
+      "Paleogene": 155,
+      "Pennsylvanian": 143,
+      "Triassic": 138,
+      "Jurassic": 114,
+      "Silurian": 102,
+      "Upper Ordovician": 91,
+      "Cretaceous": 88,
+      "Cambrian": 74,
+      "Lower Cretaceous": 58,
+      "Eocene": 49,
+      "Ludlow": 41,
+      "Lower Devonian": 33,
+      "Upper Cretaceous": 32,
+      "Upper Jurassic": 30,
+      "Middle Jurassic": 30,
+      "Middle Ordovician": 20,
+      "Neogene": 19,
+      "Lower Ordovician": 17,
+      "Holocene": 17,
+      "Pridoli": 17,
+      "Orosirian": 13,
+      "Furongian": 11,
+      "Calymmian": 6,
+      "Oligocene": 5,
+      "Ectasian": 1
+     },
+     "licence": {
+      "name": "Open Government Licence, as reported by BGS; some catalogue records say licence not set",
+      "status": "reported"
+     },
+     "attribution": "Contains NERC materials (c) NERC [year]",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "ie_gsi_500k_bedrock",
+     "file": "regional__ie_gsi_500k_bedrock.topojson",
+     "title": "Ireland, GSI and GSNI bedrock 1:500 000",
+     "register_id": "gsi-bedrock-500k",
+     "source_scale": 500000,
+     "bytes": 1385849,
+     "over_budget": false,
+     "units_in": 3257,
+     "units_in_frame": 3257,
+     "units_out": 1346,
+     "points_in": 446518,
+     "points_out": 74319,
+     "merged": 1341,
+     "dropped": 570,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Mississippian": 599,
+      "Tonian": 193,
+      "Upper Ordovician": 123,
+      "Carboniferous": 86,
+      "Silurian": 81,
+      "Middle Ordovician": 45,
+      "Devonian": 41,
+      "Pennsylvanian": 36,
+      "Upper Devonian": 28,
+      "Paleocene": 24,
+      "Cambrian": 17,
+      "Middle Devonian": 15,
+      "Paleogene": 11,
+      "Ordovician": 11,
+      "Triassic": 10,
+      "Upper Cretaceous": 10,
+      "Oligocene": 6,
+      "Permian": 4,
+      "Orosirian": 1,
+      "Lower Ordovician": 1,
+      "Jurassic": 1
+     },
+     "licence": {
+      "name": "CC BY 4.0 for data produced by the Geological Survey Ireland; UK Open Government Licence v3.0 for data produced by GSNI (read from the licence file in the archive)",
+      "status": "verified"
+     },
+     "attribution": "Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence.",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "ni_gsni_250k_bedrock",
+     "file": "regional__ni_gsni_250k_bedrock.topojson",
+     "title": "Northern Ireland, GSNI bedrock polygons 1:250 000",
+     "register_id": "gsni-250k",
+     "source_scale": 250000,
+     "bytes": 554473,
+     "over_budget": false,
+     "units_in": 4840,
+     "units_in_frame": 4840,
+     "units_out": 1244,
+     "points_in": 105883,
+     "points_out": 22216,
+     "merged": 3465,
+     "dropped": 131,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Mississippian": 393,
+      "Tonian": 270,
+      "Paleogene": 235,
+      "Silurian": 86,
+      "Paleocene": 75,
+      "Ordovician": 47,
+      "Lower Devonian": 34,
+      "Triassic": 23,
+      "Devonian": 21,
+      "Rhyacian": 14,
+      "Cretaceous": 13,
+      "Pennsylvanian": 11,
+      "Holocene": 6,
+      "Oligocene": 6,
+      "Permian": 4,
+      "Upper Devonian": 4,
+      "Llandovery": 1,
+      "Carboniferous": 1
+     },
+     "licence": {
+      "name": "Open Government Licence v3.0 for GSNI data, as reported by Geological Survey Ireland",
+      "status": "reported"
+     },
+     "attribution": "Contains GSNI data under the Open Government Licence v3.0",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    }
+   ]
+  },
+  "detail": {
+   "scale": 1000000,
+   "metres_per_px": 264.59999999999997,
+   "tolerance_m": 185,
+   "min_unit_m2": 210039,
+   "budget_mb": 8,
+   "maps": [
+    {
+     "map_id": "uk_bgs_625k_bedrock",
+     "file": "detail__uk_bgs_625k_bedrock.topojson",
+     "title": "Great Britain, BGS Geology 625k bedrock (DiGMapGB-625 v5)",
+     "register_id": "bgs-geology-625k",
+     "source_scale": 625000,
+     "bytes": 5436045,
+     "over_budget": false,
+     "units_in": 11244,
+     "units_in_frame": 11244,
+     "units_out": 8985,
+     "points_in": 770233,
+     "points_out": 323402,
+     "merged": 551,
+     "dropped": 1708,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Tonian": 1584,
+      "Devonian": 1194,
+      "Ordovician": 826,
+      "Carboniferous": 784,
+      "Mississippian": 559,
+      "Paleogene": 478,
+      "Permian": 434,
+      "Jurassic": 364,
+      "Triassic": 327,
+      "Pennsylvanian": 325,
+      "Cretaceous": 252,
+      "Silurian": 201,
+      "Cambrian": 186,
+      "Upper Ordovician": 163,
+      "Eocene": 144,
+      "Lower Cretaceous": 133,
+      "Middle Jurassic": 98,
+      "Lower Devonian": 91,
+      "Orosirian": 82,
+      "Upper Cretaceous": 71,
+      "Ludlow": 71,
+      "Neogene": 57,
+      "Upper Jurassic": 52,
+      "Holocene": 52,
+      "Pridoli": 42,
+      "Middle Ordovician": 38,
+      "Lower Ordovician": 31,
+      "Furongian": 22,
+      "Calymmian": 9,
+      "Oligocene": 5,
+      "Ectasian": 1
+     },
+     "licence": {
+      "name": "Open Government Licence, as reported by BGS; some catalogue records say licence not set",
+      "status": "reported"
+     },
+     "attribution": "Contains NERC materials (c) NERC [year]",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "ie_gsi_500k_bedrock",
+     "file": "detail__ie_gsi_500k_bedrock.topojson",
+     "title": "Ireland, GSI and GSNI bedrock 1:500 000",
+     "register_id": "gsi-bedrock-500k",
+     "source_scale": 500000,
+     "bytes": 2674842,
+     "over_budget": false,
+     "units_in": 3257,
+     "units_in_frame": 3257,
+     "units_out": 2612,
+     "points_in": 446518,
+     "points_out": 123337,
+     "merged": 212,
+     "dropped": 433,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Mississippian": 962,
+      "Tonian": 409,
+      "Silurian": 200,
+      "Upper Ordovician": 164,
+      "Carboniferous": 161,
+      "Devonian": 112,
+      "Paleocene": 96,
+      "Middle Ordovician": 76,
+      "Pennsylvanian": 65,
+      "Upper Cretaceous": 61,
+      "Upper Devonian": 52,
+      "Paleogene": 48,
+      "Ordovician": 48,
+      "Cambrian": 44,
+      "Triassic": 28,
+      "Middle Devonian": 28,
+      "Jurassic": 27,
+      "Lower Ordovician": 9,
+      "Permian": 8,
+      "Oligocene": 6,
+      "Orosirian": 2
+     },
+     "licence": {
+      "name": "CC BY 4.0 for data produced by the Geological Survey Ireland; UK Open Government Licence v3.0 for data produced by GSNI (read from the licence file in the archive)",
+      "status": "verified"
+     },
+     "attribution": "Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence.",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    },
+    {
+     "map_id": "ni_gsni_250k_bedrock",
+     "file": "detail__ni_gsni_250k_bedrock.topojson",
+     "title": "Northern Ireland, GSNI bedrock polygons 1:250 000",
+     "register_id": "gsni-250k",
+     "source_scale": 250000,
+     "bytes": 1567560,
+     "over_budget": false,
+     "units_in": 4840,
+     "units_in_frame": 4840,
+     "units_out": 3034,
+     "points_in": 105883,
+     "points_out": 49235,
+     "merged": 1707,
+     "dropped": 99,
+     "coverage_valid_after_simplify": false,
+     "all_valid": true,
+     "chart_intervals": {
+      "Mississippian": 1071,
+      "Tonian": 553,
+      "Paleogene": 348,
+      "Paleocene": 191,
+      "Ordovician": 184,
+      "Silurian": 150,
+      "Rhyacian": 107,
+      "Lower Devonian": 92,
+      "Cretaceous": 90,
+      "Triassic": 90,
+      "Devonian": 57,
+      "Holocene": 37,
+      "Pennsylvanian": 23,
+      "Permian": 22,
+      "Oligocene": 7,
+      "Carboniferous": 5,
+      "Upper Devonian": 5,
+      "Orosirian": 1,
+      "Llandovery": 1
+     },
+     "licence": {
+      "name": "Open Government Licence v3.0 for GSNI data, as reported by Geological Survey Ireland",
+      "status": "reported"
+     },
+     "attribution": "Contains GSNI data under the Open Government Licence v3.0",
+     "confidence": "Observed (survey map); age colour Derived from the chart by the survey's own age words or numbers"
+    }
+   ]
+  }
+ },
+ "chart": {
+  "Phanerozoic": {
+   "hex": "#9ad9dd",
+   "start_ma": 538.8,
+   "end_ma": 0.0,
+   "rank": "eon"
+  },
+  "Cenozoic": {
+   "hex": "#f2f91d",
+   "start_ma": 66.0,
+   "end_ma": 0.0,
+   "rank": "era"
+  },
+  "Quaternary": {
+   "hex": "#f9f97f",
+   "start_ma": 2.58,
+   "end_ma": 0.0,
+   "rank": "period"
+  },
+  "Holocene": {
+   "hex": "#fef2ec",
+   "start_ma": 0.0117,
+   "end_ma": 0.0,
+   "rank": "epoch"
+  },
+  "Pleistocene": {
+   "hex": "#fff2ae",
+   "start_ma": 2.58,
+   "end_ma": 0.0117,
+   "rank": "epoch"
+  },
+  "Neogene": {
+   "hex": "#ffe619",
+   "start_ma": 23.03,
+   "end_ma": 2.58,
+   "rank": "period"
+  },
+  "Pliocene": {
+   "hex": "#ffff99",
+   "start_ma": 5.333,
+   "end_ma": 2.58,
+   "rank": "epoch"
+  },
+  "Miocene": {
+   "hex": "#ffff00",
+   "start_ma": 23.03,
+   "end_ma": 5.333,
+   "rank": "epoch"
+  },
+  "Paleogene": {
+   "hex": "#fd9a52",
+   "start_ma": 66.0,
+   "end_ma": 23.03,
+   "rank": "period"
+  },
+  "Oligocene": {
+   "hex": "#fdc07a",
+   "start_ma": 33.9,
+   "end_ma": 23.03,
+   "rank": "epoch"
+  },
+  "Eocene": {
+   "hex": "#fdb46c",
+   "start_ma": 56.0,
+   "end_ma": 33.9,
+   "rank": "epoch"
+  },
+  "Paleocene": {
+   "hex": "#fda75f",
+   "start_ma": 66.0,
+   "end_ma": 56.0,
+   "rank": "epoch"
+  },
+  "Mesozoic": {
+   "hex": "#67c5ca",
+   "start_ma": 251.902,
+   "end_ma": 66.0,
+   "rank": "era"
+  },
+  "Cretaceous": {
+   "hex": "#7fc64e",
+   "start_ma": 145.0,
+   "end_ma": 66.0,
+   "rank": "period"
+  },
+  "Upper Cretaceous": {
+   "hex": "#a6d84a",
+   "start_ma": 100.5,
+   "end_ma": 66.0,
+   "rank": "epoch"
+  },
+  "Lower Cretaceous": {
+   "hex": "#8ccd57",
+   "start_ma": 145.0,
+   "end_ma": 100.5,
+   "rank": "epoch"
+  },
+  "Jurassic": {
+   "hex": "#34b2c9",
+   "start_ma": 201.4,
+   "end_ma": 145.0,
+   "rank": "period"
+  },
+  "Upper Jurassic": {
+   "hex": "#b3e3ee",
+   "start_ma": 161.5,
+   "end_ma": 145.0,
+   "rank": "epoch"
+  },
+  "Middle Jurassic": {
+   "hex": "#80cfd8",
+   "start_ma": 174.7,
+   "end_ma": 161.5,
+   "rank": "epoch"
+  },
+  "Lower Jurassic": {
+   "hex": "#42aed0",
+   "start_ma": 201.4,
+   "end_ma": 174.7,
+   "rank": "epoch"
+  },
+  "Triassic": {
+   "hex": "#812b92",
+   "start_ma": 251.902,
+   "end_ma": 201.4,
+   "rank": "period"
+  },
+  "Upper Triassic": {
+   "hex": "#bd8cc3",
+   "start_ma": 237.0,
+   "end_ma": 201.4,
+   "rank": "epoch"
+  },
+  "Middle Triassic": {
+   "hex": "#b168b1",
+   "start_ma": 247.2,
+   "end_ma": 237.0,
+   "rank": "epoch"
+  },
+  "Lower Triassic": {
+   "hex": "#a4469f",
+   "start_ma": 251.902,
+   "end_ma": 247.2,
+   "rank": "epoch"
+  },
+  "Paleozoic": {
+   "hex": "#99c08d",
+   "start_ma": 538.8,
+   "end_ma": 251.902,
+   "rank": "era"
+  },
+  "Permian": {
+   "hex": "#f04028",
+   "start_ma": 298.9,
+   "end_ma": 251.902,
+   "rank": "period"
+  },
+  "Lopingian": {
+   "hex": "#fba794",
+   "start_ma": 259.51,
+   "end_ma": 251.902,
+   "rank": "epoch"
+  },
+  "Guadalupian": {
+   "hex": "#fb745c",
+   "start_ma": 273.01,
+   "end_ma": 259.51,
+   "rank": "epoch"
+  },
+  "Cisuralian": {
+   "hex": "#ef5845",
+   "start_ma": 298.9,
+   "end_ma": 273.01,
+   "rank": "epoch"
+  },
+  "Carboniferous": {
+   "hex": "#67a599",
+   "start_ma": 358.9,
+   "end_ma": 298.9,
+   "rank": "period"
+  },
+  "Pennsylvanian": {
+   "hex": "#99c2b5",
+   "start_ma": 323.2,
+   "end_ma": 298.9,
+   "rank": "subperiod"
+  },
+  "Mississippian": {
+   "hex": "#678f66",
+   "start_ma": 358.9,
+   "end_ma": 323.2,
+   "rank": "subperiod"
+  },
+  "Devonian": {
+   "hex": "#cb8c37",
+   "start_ma": 419.2,
+   "end_ma": 358.9,
+   "rank": "period"
+  },
+  "Upper Devonian": {
+   "hex": "#f1e19d",
+   "start_ma": 382.7,
+   "end_ma": 358.9,
+   "rank": "epoch"
+  },
+  "Middle Devonian": {
+   "hex": "#f1c868",
+   "start_ma": 393.3,
+   "end_ma": 382.7,
+   "rank": "epoch"
+  },
+  "Lower Devonian": {
+   "hex": "#e5ac4d",
+   "start_ma": 419.2,
+   "end_ma": 393.3,
+   "rank": "epoch"
+  },
+  "Silurian": {
+   "hex": "#b3e1b6",
+   "start_ma": 443.8,
+   "end_ma": 419.2,
+   "rank": "period"
+  },
+  "Pridoli": {
+   "hex": "#e6f5e1",
+   "start_ma": 423.0,
+   "end_ma": 419.2,
+   "rank": "epoch"
+  },
+  "Ludlow": {
+   "hex": "#bfe6cf",
+   "start_ma": 427.4,
+   "end_ma": 423.0,
+   "rank": "epoch"
+  },
+  "Wenlock": {
+   "hex": "#b3e1c2",
+   "start_ma": 433.4,
+   "end_ma": 427.4,
+   "rank": "epoch"
+  },
+  "Llandovery": {
+   "hex": "#99d7b3",
+   "start_ma": 443.8,
+   "end_ma": 433.4,
+   "rank": "epoch"
+  },
+  "Ordovician": {
+   "hex": "#009270",
+   "start_ma": 485.4,
+   "end_ma": 443.8,
+   "rank": "period"
+  },
+  "Upper Ordovician": {
+   "hex": "#7fca93",
+   "start_ma": 458.4,
+   "end_ma": 443.8,
+   "rank": "epoch"
+  },
+  "Middle Ordovician": {
+   "hex": "#4db47e",
+   "start_ma": 470.0,
+   "end_ma": 458.4,
+   "rank": "epoch"
+  },
+  "Lower Ordovician": {
+   "hex": "#1a9d6f",
+   "start_ma": 485.4,
+   "end_ma": 470.0,
+   "rank": "epoch"
+  },
+  "Cambrian": {
+   "hex": "#7fa056",
+   "start_ma": 538.8,
+   "end_ma": 485.4,
+   "rank": "period"
+  },
+  "Furongian": {
+   "hex": "#b3e095",
+   "start_ma": 497.0,
+   "end_ma": 485.4,
+   "rank": "epoch"
+  },
+  "Miaolingian": {
+   "hex": "#a6cf86",
+   "start_ma": 509.0,
+   "end_ma": 497.0,
+   "rank": "epoch"
+  },
+  "Cambrian Series 2": {
+   "hex": "#99c078",
+   "start_ma": 521.0,
+   "end_ma": 509.0,
+   "rank": "epoch"
+  },
+  "Terreneuvian": {
+   "hex": "#8cb06c",
+   "start_ma": 538.8,
+   "end_ma": 521.0,
+   "rank": "epoch"
+  },
+  "Precambrian": {
+   "hex": "#f74370",
+   "start_ma": 4567.0,
+   "end_ma": 538.8,
+   "rank": "supereon"
+  },
+  "Proterozoic": {
+   "hex": "#f73563",
+   "start_ma": 2500.0,
+   "end_ma": 538.8,
+   "rank": "eon"
+  },
+  "Neoproterozoic": {
+   "hex": "#feb342",
+   "start_ma": 1000.0,
+   "end_ma": 538.8,
+   "rank": "era"
+  },
+  "Ediacaran": {
+   "hex": "#fed96a",
+   "start_ma": 635.0,
+   "end_ma": 538.8,
+   "rank": "period"
+  },
+  "Cryogenian": {
+   "hex": "#fecc5c",
+   "start_ma": 720.0,
+   "end_ma": 635.0,
+   "rank": "period"
+  },
+  "Tonian": {
+   "hex": "#febf4e",
+   "start_ma": 1000.0,
+   "end_ma": 720.0,
+   "rank": "period"
+  },
+  "Mesoproterozoic": {
+   "hex": "#fdb462",
+   "start_ma": 1600.0,
+   "end_ma": 1000.0,
+   "rank": "era"
+  },
+  "Stenian": {
+   "hex": "#fed99a",
+   "start_ma": 1200.0,
+   "end_ma": 1000.0,
+   "rank": "period"
+  },
+  "Ectasian": {
+   "hex": "#fdcc8a",
+   "start_ma": 1400.0,
+   "end_ma": 1200.0,
+   "rank": "period"
+  },
+  "Calymmian": {
+   "hex": "#fdc07a",
+   "start_ma": 1600.0,
+   "end_ma": 1400.0,
+   "rank": "period"
+  },
+  "Paleoproterozoic": {
+   "hex": "#f74370",
+   "start_ma": 2500.0,
+   "end_ma": 1600.0,
+   "rank": "era"
+  },
+  "Statherian": {
+   "hex": "#f875a7",
+   "start_ma": 1800.0,
+   "end_ma": 1600.0,
+   "rank": "period"
+  },
+  "Orosirian": {
+   "hex": "#f76898",
+   "start_ma": 2050.0,
+   "end_ma": 1800.0,
+   "rank": "period"
+  },
+  "Rhyacian": {
+   "hex": "#f75b89",
+   "start_ma": 2300.0,
+   "end_ma": 2050.0,
+   "rank": "period"
+  },
+  "Siderian": {
+   "hex": "#f74f7c",
+   "start_ma": 2500.0,
+   "end_ma": 2300.0,
+   "rank": "period"
+  },
+  "Archean": {
+   "hex": "#f0047f",
+   "start_ma": 4031.0,
+   "end_ma": 2500.0,
+   "rank": "eon"
+  },
+  "Neoarchean": {
+   "hex": "#f99bc1",
+   "start_ma": 2800.0,
+   "end_ma": 2500.0,
+   "rank": "era"
+  },
+  "Mesoarchean": {
+   "hex": "#f768a9",
+   "start_ma": 3200.0,
+   "end_ma": 2800.0,
+   "rank": "era"
+  },
+  "Paleoarchean": {
+   "hex": "#f4449f",
+   "start_ma": 3600.0,
+   "end_ma": 3200.0,
+   "rank": "era"
+  },
+  "Eoarchean": {
+   "hex": "#da037f",
+   "start_ma": 4031.0,
+   "end_ma": 3600.0,
+   "rank": "era"
+  },
+  "Hadean": {
+   "hex": "#ae027e",
+   "start_ma": 4567.0,
+   "end_ma": 4031.0,
+   "rank": "eon"
+  }
+ },
+ "lithology": {
+  "unconsolidated": {
+   "label": "Unconsolidated deposits",
+   "group": "surficial",
+   "hex": "#efe6cf"
+  },
+  "clastic": {
+   "label": "Clastic sedimentary rocks",
+   "group": "sedimentary",
+   "hex": "#d9b26f"
+  },
+  "carbonate": {
+   "label": "Carbonate rocks",
+   "group": "sedimentary",
+   "hex": "#9fc5e8"
+  },
+  "evaporite": {
+   "label": "Evaporites",
+   "group": "sedimentary",
+   "hex": "#e6c2e0"
+  },
+  "sedimentary_undiff": {
+   "label": "Sedimentary rocks, undifferentiated",
+   "group": "sedimentary",
+   "hex": "#c9a86a"
+  },
+  "volcanic_felsic": {
+   "label": "Felsic and intermediate volcanic rocks",
+   "group": "igneous",
+   "hex": "#e9967a"
+  },
+  "volcanic_mafic": {
+   "label": "Mafic volcanic rocks",
+   "group": "igneous",
+   "hex": "#8b3a3a"
+  },
+  "plutonic_felsic": {
+   "label": "Granitoids and felsic igneous rocks",
+   "group": "igneous",
+   "hex": "#e76f51"
+  },
+  "plutonic_mafic": {
+   "label": "Mafic and ultramafic rocks, mainly intrusive",
+   "group": "igneous",
+   "hex": "#5c3d2e"
+  },
+  "igneous_undiff": {
+   "label": "Igneous rocks, undifferentiated",
+   "group": "igneous",
+   "hex": "#c25a4a"
+  },
+  "gneiss": {
+   "label": "Gneiss, migmatite and granulite",
+   "group": "metamorphic",
+   "hex": "#7b8fb5"
+  },
+  "schist": {
+   "label": "Schist, phyllite and slate",
+   "group": "metamorphic",
+   "hex": "#9aa6c4"
+  },
+  "quartzite": {
+   "label": "Quartzite",
+   "group": "metamorphic",
+   "hex": "#cfd8e8"
+  },
+  "amphibolite": {
+   "label": "Amphibolite, greenstone and metavolcanic rocks",
+   "group": "metamorphic",
+   "hex": "#4f7369"
+  },
+  "marble": {
+   "label": "Marble",
+   "group": "metamorphic",
+   "hex": "#dfe8f0"
+  },
+  "metamorphic_undiff": {
+   "label": "Metamorphic rocks, undifferentiated",
+   "group": "metamorphic",
+   "hex": "#6b7fa3"
+  },
+  "ice_water": {
+   "label": "Ice, water and non-geological",
+   "group": "other",
+   "hex": "#f2f6fa"
+  },
+  "unknown": {
+   "label": "Not classified",
+   "group": "other",
+   "hex": "#d9d9d9"
+  }
+ },
+ "attribution": [
+  "Contains NERC materials (c) NERC [year]",
+  "Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence.",
+  "Contains GSNI data under the Open Government Licence v3.0"
+ ]
+}
