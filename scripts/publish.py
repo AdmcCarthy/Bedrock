@@ -63,6 +63,11 @@ def main() -> None:
         shutil.copy2(RELIEF / "data" / "out" / fr / "regional.geojson", d / "regional.geojson")
         Image.open(RELIEF / "data" / "out" / fr / "overview_hillshade.png").convert("L").save(d / "overview_hillshade.png", optimize=True)
         shutil.copy2(RELIEF / "data" / "out" / fr / "overview.geojson", d / "overview.geojson")
+        # Relief's base map (linear bathymetry, stepped climate-tinted land) and the part of its manifest the viewers read
+        if man.get("base"):
+            for name in man["base"]["regional"].values():
+                shutil.copy2(RELIEF / "data" / "out" / fr / name, d / name)
+            (d / "manifest.json").write_text(json.dumps({"area": man["area"], "crs": man["crs"], "extent": man["extent"], "base": man["base"]}, indent=1), encoding="utf-8")
         manifest["relief"][fr] = {"crs": man["crs"], "extent": man["extent"], "attribution": "Relief (github.com/AdmcCarthy/Relief): Copernicus DEM GLO-90 (ESA), EMODnet Bathymetry; Kartverket and MAREANO on the Norwegian Sea frame"}
 
     # geology regions

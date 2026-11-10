@@ -5,7 +5,9 @@
    Views: age | lithology | age+hatch | tone (lithology hue, age as lightness on a linear ramp) | fjord (age alone on
    SubScout's fjord ramp) | terrain (Relief frames only: Relief's height and depth classes, bedrock hidden).
    Palettes: ics | vintage | paper. Frames: plain | vintage. Shade: 0 (off) to 1.5.
-   The sea floor is always on Relief's shelf depth scale (palette copied from Relief/preview/palette.js); the key shows it. */
+   Under everything on a Relief frame, Relief's base map (regional_base_{light,dark}.png: linear bathymetry, stepped
+   climate-tinted land; Relief/docs/base-maps.md); the depth key follows Relief's manifest. Bands are coloured here only
+   for a frame without a base. */
 
 const params = new URLSearchParams(location.search);
 const region = params.get("r") || "norway";
@@ -88,9 +90,17 @@ async function loadRelief(level) {
     hillCache.set(lv, img.width ? toneHill(img) : null);
     const b = await fetch(doc.relief.bands[lv]).then(r => r.ok ? r.json() : null).catch(() => null);
     bandCache.set(lv, b);
+    // Relief's base map (Relief/docs/base-maps.md): linear bathymetry on the frame's depth scale, stepped land tints by climate
+    // zone, rendered once by Relief; its manifest names the depth scale for the key
+    const dir = (doc.relief.hillshade[lv]).replace(/\/[^/]*$/, "");
+    const rm = await fetch(dir + "/manifest.json").then(r => r.ok ? r.json() : null).catch(() => null);
+    const bases = {};
+    if (rm && rm.base) for (const th of ["light", "dark"]) { const im = new Image(); im.src = dir + "/" + rm.base.regional[th]; await new Promise(res => { im.onload = res; im.onerror = res; }); if (im.width) bases[th] = im; }
+    baseCache.set(lv, { rm, bases });
   }
-  return [hillCache.get(lv), bandCache.get(lv)];
+  return [hillCache.get(lv), bandCache.get(lv), baseCache.get(lv)];
 }
+const baseCache = new Map();
 
 /* colour */
 const noAge = () => dark ? "#6b7280" : "#cfd3d8";
@@ -126,13 +136,16 @@ const alphaFill = (hex, a) => { const c = d3.color(hex); if (!c) return hex; c.o
 const RELIEF = {
   seaStops: [0, 20, 50, 100, 200, 500, 1000], seaMax: 1300,
   sea: { light: ["#e8f0f2", "#cfe1e6", "#aacdd8", "#7eb0c5", "#5891ae", "#3a6d94", "#264b73", "#162b50"], dark: ["#3a8aa2", "#2f7690", "#25647d", "#1c526b", "#144157", "#0e3045", "#092336", "#06172a"] },
+  oceanStops: [0, 200, 1000, 2000, 3000, 4000, 5000, 6000, 7000], oceanMax: 7000,
+  ocean: { light: ["#e2f4f9", "#bfe2ed", "#83bddc", "#5c9acd", "#4579ba", "#355a9f", "#2a3e80", "#1e2763", "#131546"], dark: ["#71b7c8", "#56a5bd", "#2c83aa", "#1d679c", "#154b8a", "#113375", "#101e5c", "#0a0b42", "#040027"] },
   landStops: [0, 50, 150, 300, 600, 1000, 1500, 2000], landMax: 2000,
   landRaw: { light: ["#d6e8b8", "#c6dea0", "#bad38f", "#cbcf92", "#d9c897", "#ccb8a0", "#d8d0c6", "#efece8"], dark: ["#46572f", "#4c5d33", "#536237", "#5d633b", "#665f42", "#655d50", "#85807a", "#aaa6a1"] },
 };
 function tune(h, sat, mix) { const c = d3.rgb(h), y = 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b, t = mix > 0 ? 255 : 0, m = Math.abs(mix); const f = v => { const g = y + (v - y) * sat; return g + (t - g) * m; }; return d3.rgb(f(c.r), f(c.g), f(c.b)).formatHex(); }
 function reliefColour(kind, metres) {
-  const cols = kind === "sea" ? RELIEF.sea[dark ? "dark" : "light"] : RELIEF.landRaw[dark ? "dark" : "light"].map(h => tune(h, 0.5, dark ? -0.08 : 0.08));
-  const br = kind === "sea" ? RELIEF.seaStops : RELIEF.landStops, max = kind === "sea" ? RELIEF.seaMax : RELIEF.landMax;
+  const th = dark ? "dark" : "light";
+  const cols = kind === "sea" ? RELIEF.sea[th] : kind === "ocean" ? RELIEF.ocean[th] : RELIEF.landRaw[th].map(h => tune(h, 0.5, dark ? -0.08 : 0.08));
+  const br = kind === "sea" ? RELIEF.seaStops : kind === "ocean" ? RELIEF.oceanStops : RELIEF.landStops, max = kind === "sea" ? RELIEF.seaMax : kind === "ocean" ? RELIEF.oceanMax : RELIEF.landMax;
   const stops = br.map((b, i) => [b / max, cols[i]]); if (cols.length > br.length) stops.push([1, cols.at(-1)]);
   let t = Math.min(1, Math.max(0, metres / max)), k = 0; while (k < stops.length - 2 && t > stops[k + 1][0]) k++;
   const [t0, c0] = stops[k], [t1, c1] = stops[k + 1]; return d3.interpolateRgb(c0, c1)(Math.min(1, Math.max(0, (t - t0) / (t1 - t0 || 1))));
@@ -161,7 +174,16 @@ function tickBar(title, rampOf, ticks) {
   const tk = ticks.map(([t, l]) => `<span style="left:${(100 * t).toFixed(1)}%">${l}</span>`).join("");
   return `<div class="k">${title}</div><div class="bar">${stops}</div><div class="ticks">${tk}</div>`;
 }
-let reliefLevels = { sea: null, land: null };
+let reliefLevels = { sea: null, land: null, rm: null };
+// the depth key as Relief's manifest describes it (a linear bar with the manifest's ticks), else the stepped bands drawn here
+function depthKey() {
+  if (reliefLevels.rm) {
+    const ds = reliefLevels.rm.base.depth_scale, kind = ds.kind === "ocean" ? "ocean" : "sea", max = ds.max_m;
+    const ticks = ds.ticks_m.filter(v => v / max < 0.9).map(v => [v / max, fmtN(v)]).concat([[1, fmtN(max) + "+"]]);
+    return tickBar(`Sea floor, depth in m (Relief, linear, ${ds.kind} scale)`, t => reliefColour(kind, t * max), ticks);
+  }
+  return reliefLevels.sea ? stepStrip("Sea floor, depth in m (Relief, shelf scale)", "sea", reliefLevels.sea) : "";
+}
 
 /* hatches */
 const hatchCache = new Map();
@@ -196,15 +218,20 @@ async function render() {
   proj = makeProjection(width, height, pad);
   const chosen = levelName || chooseLevel(proj);
   layers = await loadLevel(chosen); path = d3.geoPath(proj, ctx); markLevel(chosen);
-  const [hill, bands] = await loadRelief(chosen);
+  const [hill, bands, rbase] = await loadRelief(chosen);
 
   ctx.fillStyle = vintage ? (dark ? "#2a2722" : pal.paper) : getComputedStyle(document.body).getPropertyValue("--sea").trim();
   ctx.fillRect(0, 0, width, height);
   if (vintage) paperGrain();
   ctx.save(); ctx.beginPath(); path(bboxFeature); ctx.clip();
   // Relief's sea floor on its depth scale under everything (quieter on paper); in the terrain view the land on its height scale too
-  reliefLevels = { sea: null, land: null };
-  if (bands) {
+  reliefLevels = { sea: null, land: null, rm: rbase && rbase.rm && rbase.rm.base ? rbase.rm : null };
+  const baseImg = rbase && rbase.bases[dark ? "dark" : "light"];
+  if (baseImg) {
+    const [x0, y0, x1, y1] = doc.relief.extent; const a = proj([x0, y1]), b = proj([x1, y0]);
+    ctx.save(); if (vintage) ctx.globalAlpha = 0.6; ctx.drawImage(baseImg, a[0], a[1], b[0] - a[0], b[1] - a[1]); ctx.restore();
+    if (bands) reliefLevels.land = bandLevels(bands, "land");   // for the terrain key only; the image carries the colour
+  } else if (bands) {
     reliefLevels.sea = drawBands(bands, "sea", vintage ? 0.5 : 1);
     if (mode === "terrain") reliefLevels.land = drawBands(bands, "land", vintage ? 0.85 : 1);
   }
@@ -264,10 +291,10 @@ function legend(chosen) {
   const counts = new Map();
   for (const L of layers) for (const f of L.features) { const k = (mode === "lithology" || mode === "tone") ? f.properties.litho_class : f.properties.ics_display; counts.set(k, (counts.get(k) || 0) + 1); }
   let html;
-  const depthKey = reliefLevels.sea ? `<div class="sep"></div>${stepStrip("Sea floor, depth in m (Relief, shelf scale)", "sea", reliefLevels.sea)}` : "";
+  const dk = depthKey();
   if (mode === "terrain") {
-    html = `<h3>Terrain (Relief) · ${chosen}</h3>` + (reliefLevels.land ? stepStrip("Land, height in m", "land", reliefLevels.land) : "") + depthKey +
-      `<div class="k" style="margin-top:6px">Relief's Detuned style: stepped height classes, the sea floor on the shelf depth scale, hillshade as set above. Bedrock is hidden.</div>`;
+    html = `<h3>Terrain (Relief) · ${chosen}</h3>` + (reliefLevels.land ? stepStrip("Land, height in m (temperate tints; boreal and tundra ground is greyer)", "land", reliefLevels.land) : "") + (dk ? `<div class="sep"></div>${dk}` : "") +
+      `<div class="k" style="margin-top:6px">Relief's Detuned style: stepped height classes cross-blended by climate zone, the sea floor as a linear gradient on the depth scale, hillshade as set above. Bedrock is hidden.</div>`;
     el.innerHTML = html; el.classList.toggle("vintage", frame === "vintage"); el.classList.toggle("dark", dark); return;
   }
   if (mode === "tone") {
@@ -297,7 +324,7 @@ function legend(chosen) {
     html = `<h3>${frame === "vintage" ? "Explication des couleurs" : title} · ${chosen}</h3>` + rows.map(([hex, label, n]) => `<div class="row"><span class="sw" style="background:${hex}"></span><span>${label}</span><span class="n">${n}</span></div>`).join("") + extra;
   }
   // the depth key sits first, above the unit list, which can be long enough to scroll
-  el.innerHTML = (reliefLevels.sea ? stepStrip("Sea floor, depth in m (Relief, shelf scale)", "sea", reliefLevels.sea) + `<div class="sep"></div>` : "") + html;
+  el.innerHTML = (dk ? dk + `<div class="sep"></div>` : "") + html;
   el.querySelectorAll("canvas[data-hatch]").forEach(c => { const g = c.getContext("2d"); g.fillStyle = dark ? "#2a3444" : "#fff"; g.fillRect(0, 0, 14, 14); const h = hatch(c.dataset.hatch); if (h) { g.fillStyle = h; g.fillRect(0, 0, 14, 14); } });
   el.classList.toggle("vintage", frame === "vintage"); el.classList.toggle("dark", dark);
 }

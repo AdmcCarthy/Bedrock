@@ -2,7 +2,8 @@
    Data: ../data/derived/<region>/layers.json and the files it lists; Relief layers from the sibling repo (serve the parent).
    Views (fill): cluster | quality | yield | sand | shield | carbonate | age | size | none.
    Water: all (slope threads under the river network and flow ribbons: the catchment-shape view) | network | flow | slope | off.
-   Sea floor and land wash on Relief's own depth and height scales (palette copied from Relief/preview/palette.js).
+   Under everything, Relief's base map (regional_base_{light,dark}.png: linear bathymetry, stepped climate-tinted land, see
+   Relief/docs/base-maps.md); the depth key follows Relief's manifest. Bands are coloured here only for a frame without a base.
    Ink: strong (clear blue, firm outlines) | subtle (desaturated, thin, blends with the map).  Shade: 0 to 1.5.
    Fold: hide catchments under a size class so the smallest do not turn the coast to noise. */
 
@@ -32,6 +33,12 @@ const systemMesh = topojson.mesh(topoS, topoS.objects.systems, (a, b) => a !== b
 const rivers = topojson.feature(topoR, topoR.objects.rivers).features;
 const hill = new Image(); hill.src = doc.relief.hillshade;
 await new Promise(res => { hill.onload = res; hill.onerror = res; });
+// Relief's base map (docs/base-maps.md in Relief): linear bathymetry on the frame's depth scale, stepped land tints by climate
+// zone, rendered once by Relief and drawn here as it is; its manifest names the depth scale for the key
+const reliefDir = ("../../" + doc.relief.hillshade).replace(/\/[^/]*$/, "");
+const rman = await fetch(reliefDir + "/manifest.json").then(r => r.ok ? r.json() : null).catch(() => null);
+const baseImg = new Image();
+if (rman && rman.base) { baseImg.src = reliefDir + "/" + rman.base.regional[dark ? "dark" : "light"]; await new Promise(res => { baseImg.onload = res; baseImg.onerror = res; }); }
 // Relief's hillshade PNG is light (flat ground sits near 180 of 255), and soft-light is neutral at mid grey, so drawn as it
 // comes it barely shows. Flat ground is moved to mid grey and the slopes stretched before the shade is composited.
 function toneHill(img, flat = 180, gain = 2.5) {
@@ -50,13 +57,16 @@ for (const f of systems) f.bbox = d3.geoPath().bounds(f);
 const RELIEF = {
   seaStops: [0, 20, 50, 100, 200, 500, 1000], seaMax: 1300,
   sea: { light: ["#e8f0f2", "#cfe1e6", "#aacdd8", "#7eb0c5", "#5891ae", "#3a6d94", "#264b73", "#162b50"], dark: ["#3a8aa2", "#2f7690", "#25647d", "#1c526b", "#144157", "#0e3045", "#092336", "#06172a"] },
+  oceanStops: [0, 200, 1000, 2000, 3000, 4000, 5000, 6000, 7000], oceanMax: 7000,
+  ocean: { light: ["#e2f4f9", "#bfe2ed", "#83bddc", "#5c9acd", "#4579ba", "#355a9f", "#2a3e80", "#1e2763", "#131546"], dark: ["#71b7c8", "#56a5bd", "#2c83aa", "#1d679c", "#154b8a", "#113375", "#101e5c", "#0a0b42", "#040027"] },
   landStops: [0, 50, 150, 300, 600, 1000, 1500, 2000], landMax: 2000,
   landRaw: { light: ["#d6e8b8", "#c6dea0", "#bad38f", "#cbcf92", "#d9c897", "#ccb8a0", "#d8d0c6", "#efece8"], dark: ["#46572f", "#4c5d33", "#536237", "#5d633b", "#665f42", "#655d50", "#85807a", "#aaa6a1"] },
 };
 function tune(h, sat, mix) { const c = d3.rgb(h), y = 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b, t = mix > 0 ? 255 : 0, m = Math.abs(mix); const f = v => { const g = y + (v - y) * sat; return g + (t - g) * m; }; return d3.rgb(f(c.r), f(c.g), f(c.b)).formatHex(); }
 function reliefColour(kind, metres) {
-  const cols = kind === "sea" ? RELIEF.sea[dark ? "dark" : "light"] : RELIEF.landRaw[dark ? "dark" : "light"].map(h => tune(h, 0.5, dark ? -0.08 : 0.08));
-  const br = kind === "sea" ? RELIEF.seaStops : RELIEF.landStops, max = kind === "sea" ? RELIEF.seaMax : RELIEF.landMax;
+  const th = dark ? "dark" : "light";
+  const cols = kind === "sea" ? RELIEF.sea[th] : kind === "ocean" ? RELIEF.ocean[th] : RELIEF.landRaw[th].map(h => tune(h, 0.5, dark ? -0.08 : 0.08));
+  const br = kind === "sea" ? RELIEF.seaStops : kind === "ocean" ? RELIEF.oceanStops : RELIEF.landStops, max = kind === "sea" ? RELIEF.seaMax : kind === "ocean" ? RELIEF.oceanMax : RELIEF.landMax;
   const stops = br.map((b, i) => [b / max, cols[i]]); if (cols.length > br.length) stops.push([1, cols.at(-1)]);
   let t = Math.min(1, Math.max(0, metres / max)), k = 0; while (k < stops.length - 2 && t > stops[k + 1][0]) k++;
   const [t0, c0] = stops[k], [t1, c1] = stops[k + 1]; return d3.interpolateRgb(c0, c1)(Math.min(1, Math.max(0, (t - t0) / (t1 - t0 || 1))));
@@ -85,6 +95,13 @@ function tickBar(title, rampOf, ticks) {
   const tk = ticks.map(([t, l]) => `<span style="left:${(100 * t).toFixed(1)}%">${l}</span>`).join("");
   return `<div class="k">${title}</div><div class="bar">${stops}</div><div class="ticks">${tk}</div>`;
 }
+// the depth key as Relief's manifest describes it: a linear bar on the frame's depth scale with the manifest's ticks
+function depthKey() {
+  if (!rman || !rman.base) return "";
+  const ds = rman.base.depth_scale, kind = ds.kind === "ocean" ? "ocean" : "sea", max = ds.max_m;
+  const ticks = ds.ticks_m.filter(v => v / max < 0.9).map(v => [v / max, fmtN(v)]).concat([[1, fmtN(max) + "+"]]);
+  return `<div class="sep"></div>` + tickBar(`Sea floor, depth in m (Relief, linear, ${ds.kind} scale)`, t => reliefColour(kind, t * max), ticks);
+}
 
 const CL = ["#c8553d", "#3d6e9e", "#7a9a3b", "#b8860b", "#6b4c9a", "#2e8b8b", "#a0522d", "#5f5f5f"];
 const SIZE = { "under 1,000 km2": "#dcd6c8", "1,000 to 10,000 km2": "#b9b1a0", "10,000 to 100,000 km2": "#8c8372", "over 100,000 km2": "#5a5247" };
@@ -93,7 +110,10 @@ const ramp = d3.scaleSequential(d3.interpolateViridis).domain([0, 1]);
 const ageRamp = d3.scaleSequential(t => d3.interpolateRdYlBu(1 - t)).domain([1, 3.5]);
 const qualRamp = d3.scaleSequential(d3.interpolateYlGnBu).domain([0.1, 0.6]);      // sand quality proxy, most catchments fall between
 const yieldRamp = d3.scaleSequential(d3.interpolateYlOrBr).domain([0.5, 3]);        // log10 yield t/km2/yr, or log10 sand Mt/yr + 2
-const gradRamp = d3.scaleSequential(d3.interpolateViridis).domain([0, 0.08]);       // slope flow gradient (m/m)
+// Slope flow gradient (m/m) on one family with the water: flat ground in the detuned river blue, steep in a saturated indigo.
+// In the combined view the ribbons take the flat tone at low saturation and the threads above them carry the colour.
+const SHAPE = { flat: dark ? "#7fa3b8" : "#7f9fb4", steep: dark ? "#b08cff" : "#3a1f9c" };
+const shapeRamp = d3.scaleSequential(d3.interpolateHcl(SHAPE.flat, SHAPE.steep)).domain([0, 0.08]);
 const visible = p => (p.log10_area ?? 9) >= fold;
 
 function fillOf(p) {
@@ -123,9 +143,10 @@ function render() {
   path = d3.geoPath(proj, ctx);
   const [px0, py1] = proj([x0, y0]), [px1, py0] = proj([x1, y1]);
   ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--sea").trim(); ctx.fillRect(0, 0, W, H);
-  // Relief's sea floor on its depth scale, the land as a quiet height wash: the catchments sit on terrain that reads as terrain
+  // Relief's base map under everything (linear sea, stepped climate-tinted land); the bands coloured here only if a frame has no base yet
   let seaLevels = null;
-  if (bands) { seaLevels = drawBands("sea", 1); drawBands("land", ink === "strong" ? 0.55 : 0.75); }
+  if (baseImg.width) { ctx.drawImage(baseImg, px0, py0, px1 - px0, py1 - py0); if (ink === "strong") { ctx.fillStyle = dark ? "rgba(0,0,0,.18)" : "rgba(255,255,255,.22)"; ctx.fillRect(px0, py0, px1 - px0, py1 - py0); } }
+  else if (bands) { seaLevels = drawBands("sea", 1); drawBands("land", ink === "strong" ? 0.55 : 0.75); }
   // catchments
   const shown = systems.filter(f => visible(f.properties));
   const fa = ink === "strong" ? (dark ? 0.55 : 0.5) : (dark ? 0.35 : 0.3);
@@ -138,16 +159,17 @@ function render() {
   const sysOf = new Map(shown.map(f => [f.properties.system, f.properties]));
   // "all" is the catchment-shape view: the fall lines of the terrain as fine threads underneath, the rivers as ribbons gathering
   // over them and the network as a hairline, so the shape of each catchment reads from slope to mouth in one picture
-  if (riverMode === "slope" || riverMode === "all") slopeThreads(riverMode === "all");
+  // in the combined view the ribbons are detuned and sit under the slope threads, which carry the saturated colour; all one family
   if (riverMode === "network" || riverMode === "all") {
     for (const f of rivers) {
       if (fold && !sysOf.has(f.properties.system)) continue;
       const q = f.properties.log_discharge ?? 0; ctx.beginPath(); path(f);
       ctx.lineWidth = riverMode === "all" ? 0.3 : Math.max(0.3, (ink === "strong" ? 0.25 : 0.15) + (ink === "strong" ? 0.9 : 0.5) * q);
-      ctx.strokeStyle = riverMode === "all" ? alphaFill(inkRiver(), 0.35) : inkRiver(); ctx.stroke();
+      ctx.strokeStyle = riverMode === "all" ? alphaFill(SHAPE.flat, 0.3) : inkRiver(); ctx.stroke();
     }
   }
-  if (riverMode === "flow" || riverMode === "all") flowLines(sysOf);
+  if (riverMode === "flow" || riverMode === "all") flowLines(sysOf, riverMode === "all");
+  if (riverMode === "slope" || riverMode === "all") slopeThreads(riverMode === "all");
   // outlets
   for (const f of outlets.features) {
     if (fold && !sysOf.has(f.properties.system)) continue;
@@ -160,32 +182,33 @@ function render() {
 }
 /* Slope flow: paths of steepest descent on Relief's terrain, coloured by their mean gradient, the fall lines the rivers follow.
    Under the rivers (the combined view) they are drawn finer and quieter so the ribbons stay the subject. */
-function slopeThreads(under) {
+function slopeThreads(combined) {
   if (!slopeFlow) return;
   for (const f of slopeFlow.features) {
     const g = f.properties.mean_gradient; ctx.beginPath(); path(f);
-    ctx.strokeStyle = alphaFill(gradRamp(g), under ? (ink === "strong" ? 0.55 : 0.3) : (ink === "strong" ? 0.8 : 0.45)); ctx.lineWidth = under ? 0.45 : (ink === "strong" ? 0.7 : 0.45); ctx.stroke();
+    ctx.strokeStyle = alphaFill(shapeRamp(g), combined ? (ink === "strong" ? 0.9 : 0.6) : (ink === "strong" ? 0.85 : 0.5)); ctx.lineWidth = combined ? 0.6 : (ink === "strong" ? 0.7 : 0.45); ctx.stroke();
   }
 }
 
 /* Flow-line view: each reach drawn as a tapered ribbon whose width grows with discharge, in the colour of its catchment's
    group (or the ink), with a soft glow; the network reads as flow converging on the outlet rather than as a wire frame.
    The taper follows seismic_art's cities concept: strokes gain weight as they gather. Smoothing is Chaikin, two passes. */
-function flowLines(sysOf) {
+function flowLines(sysOf, combined = false) {
   const byQ = rivers.filter(f => !fold || sysOf.has(f.properties.system)).sort((a, b) => (a.properties.log_discharge ?? 0) - (b.properties.log_discharge ?? 0));
   ctx.save();
   for (const pass of ["glow", "core"]) {
     for (const f of byQ) {
       const p = f.properties, q = Math.max(0, p.log_discharge ?? 0);
       const sys = sysOf.get(p.system);
-      const col = ink === "strong" ? (sys && sys.cluster >= 0 && mode === "cluster" ? CL[sys.cluster % CL.length] : (dark ? "#a8d0ff" : "#1f5a8f")) : (dark ? "#aab7c6" : "#5c6f82");
+      let col = ink === "strong" ? (sys && sys.cluster >= 0 && mode === "cluster" ? CL[sys.cluster % CL.length] : (dark ? "#a8d0ff" : "#1f5a8f")) : (dark ? "#aab7c6" : "#5c6f82");
+      if (combined) col = mode === "cluster" && ink === "strong" ? tune(col, 0.35, dark ? -0.05 : 0.08) : SHAPE.flat;   // detuned, so the threads above carry the colour
       const lines = f.geometry.type === "LineString" ? [f.geometry.coordinates] : f.geometry.coordinates;
       for (const line of lines) {
         const pts = chaikin(line.map(c => proj(c)), 2);
         if (pts.length < 2) continue;
         ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
-        if (pass === "glow") { ctx.strokeStyle = alphaFill(col, ink === "strong" ? 0.18 : 0.1); ctx.lineWidth = 2.2 + 2.6 * q; }
-        else { ctx.strokeStyle = alphaFill(col, ink === "strong" ? 0.95 : 0.55); ctx.lineWidth = 0.4 + 1.3 * q; }
+        if (pass === "glow") { ctx.strokeStyle = alphaFill(col, combined ? 0.1 : ink === "strong" ? 0.18 : 0.1); ctx.lineWidth = 2.2 + 2.6 * q; }
+        else { ctx.strokeStyle = alphaFill(col, combined ? 0.6 : ink === "strong" ? 0.95 : 0.55); ctx.lineWidth = 0.4 + 1.3 * q; }
         ctx.stroke();
       }
     }
@@ -225,11 +248,11 @@ function legend(seaLevels) {
   }
   const foldNote = fold ? `<div class="row"><span class="k">catchments under ${fold === 3 ? "1,000" : "10,000"} km² hidden</span></div>` : "";
   const water = [];
-  if (riverMode === "all") water.push(`<div class="k" style="margin-top:6px">Catchment shapes: the terrain's fall lines as fine threads, the river network as a hairline, and the rivers as ribbons whose width and glow grow with mean discharge${mode === "cluster" && ink === "strong" ? " in the colour of the catchment group" : ""}</div>`);
+  if (riverMode === "all") water.push(`<div class="k" style="margin-top:6px">Catchment shapes: the rivers as muted ribbons whose width grows with mean discharge${mode === "cluster" && ink === "strong" ? " in the detuned colour of the catchment group" : ""}, the network as a hairline, and over them the terrain's fall lines coloured by gradient</div>`);
   if (riverMode === "flow") water.push(`<div class="k" style="margin-top:6px">Flow lines: width and glow grow with mean discharge${mode === "cluster" && ink === "strong" ? ", colour is the catchment group" : ""}</div>`);
   if (riverMode === "network") water.push(`<div class="k" style="margin-top:6px">Rivers: line weight grows with mean discharge</div>`);
-  if (riverMode === "slope" || riverMode === "all") water.push(tickBar("Slope flow: steepest descent on Relief terrain, colour is the mean gradient", t => gradRamp(0.08 * t), [0, 2, 4, 6, 8].map(v => [v / 8, v + " %"])));
-  const depth = seaLevels && shade >= 0 ? `<div class="sep"></div>${stepStrip("Sea floor, depth in m (Relief, shelf scale)", "sea", seaLevels)}` : "";
+  if (riverMode === "slope" || riverMode === "all") water.push(tickBar("Fall lines: steepest descent on Relief terrain, colour is the mean gradient", t => shapeRamp(0.08 * t), [0, 2, 4, 6, 8].map(v => [v / 8, v + " %"])));
+  const depth = depthKey() || (seaLevels ? `<div class="sep"></div>${stepStrip("Sea floor, depth in m (Relief, shelf scale)", "sea", seaLevels)}` : "");
   el.innerHTML = `<h3>${mode === "cluster" ? "Catchment groups by bedrock and age" : mode === "size" ? "Catchment size, log classes" : mode === "none" ? "Catchments outlined" : "Catchment index"}</h3>${rows}${foldNote}${water.join("")}${depth}`;
 }
 function strip() {

@@ -1,0 +1,41 @@
+{
+ "area": "norwegian_sea",
+ "crs": "+proj=lcc +lat_1=62 +lat_2=70 +lat_0=66 +lon_0=8 +x_0=0 +y_0=0 +ellps=GRS80 +units=m +no_defs",
+ "extent": [
+  -590000,
+  -510000,
+  480000,
+  490000
+ ],
+ "base": {
+  "regional": {
+   "light": "regional_base_light.png",
+   "dark": "regional_base_dark.png"
+  },
+  "style": "Detuned: linear bathymetry on the ocean depth scale, stepped land classes cross-blended by climate zone",
+  "depth_scale": {
+   "kind": "ocean",
+   "max_m": 7000,
+   "ticks_m": [
+    0,
+    1000,
+    2000,
+    3000,
+    4000,
+    5000,
+    6000
+   ]
+  },
+  "land_classes_m": [
+   0,
+   50,
+   150,
+   300,
+   600,
+   1000,
+   1500,
+   2000
+  ],
+  "note": "Draw this image with an identity transform in the frame extent, your data over it, then the hillshade. Do not recolour bands or heights."
+ }
+}

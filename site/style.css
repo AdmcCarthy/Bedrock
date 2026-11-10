@@ -78,7 +78,8 @@ canvas#map { display: block; width: 100%; height: 100%; }
 .legend .glab { width: 130px; font-size: .68rem; line-height: 1.1; color: var(--muted); }
 .legend .ghead { width: 22px; font-size: .62rem; text-align: center; color: var(--muted); }
 .legend .cell { width: 22px; height: 14px; display: inline-block; border-radius: 1px; }
-.legend .bar { display: flex; flex-wrap: nowrap; gap: 0; padding: 0; border: 0; height: 14px; border-radius: 2px; overflow: hidden; margin: 4px 0 0; }
+.legend .bar { display: flex; flex-wrap: nowrap; align-items: stretch; gap: 0; padding: 0; border: 0; height: 14px; border-radius: 2px; overflow: hidden; margin: 4px 0 0; }
+.legend .bar span { display: block; height: 14px; }
 .legend .ends { display: flex; justify-content: space-between; color: var(--muted); font-size: .7rem; }
 .legend .ticks { position: relative; height: 18px; margin: 0 0 4px; color: var(--muted); font-size: .66rem; }
 .legend .ticks span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; padding-top: 4px; }
@@ -92,7 +93,8 @@ canvas#map { display: block; width: 100%; height: 100%; }
 .legend .sep { border-top: 1px solid var(--rule); margin: 8px 0 6px; }
 
 /* source-to-sink additions */
-.legend .bar { display: flex; flex-wrap: nowrap; gap: 0; padding: 0; border: 0; height: 14px; border-radius: 2px; overflow: hidden; margin: 4px 0 0; }
+.legend .bar { display: flex; flex-wrap: nowrap; align-items: stretch; gap: 0; padding: 0; border: 0; height: 14px; border-radius: 2px; overflow: hidden; margin: 4px 0 0; }
+.legend .bar span { display: block; height: 14px; }
 .legend .ends { display: flex; justify-content: space-between; color: var(--muted); font-size: .7rem; }
 .legend .ticks { position: relative; height: 18px; margin: 0 0 4px; color: var(--muted); font-size: .66rem; }
 .legend .ticks span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; padding-top: 4px; }
