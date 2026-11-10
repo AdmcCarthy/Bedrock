@@ -30,6 +30,16 @@ const systemMesh = topojson.mesh(topoS, topoS.objects.systems, (a, b) => a !== b
 const rivers = topojson.feature(topoR, topoR.objects.rivers).features;
 const hill = new Image(); hill.src = doc.relief.hillshade;
 await new Promise(res => { hill.onload = res; hill.onerror = res; });
+// Relief's hillshade PNG is light (flat ground sits near 180 of 255), and soft-light is neutral at mid grey, so drawn as it
+// comes it barely shows. Flat ground is moved to mid grey and the slopes stretched before the shade is composited.
+function toneHill(img, flat = 180, gain = 2.5) {
+  const c = document.createElement("canvas"); c.width = img.width; c.height = img.height;
+  const x = c.getContext("2d"); x.drawImage(img, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
+  for (let i = 0; i < p.length; i += 4) { const v = Math.max(0, Math.min(255, 128 + (p[i] - flat) * gain)); p[i] = p[i + 1] = p[i + 2] = v; }
+  x.putImageData(d, 0, 0); return c;
+}
+const hillT = hill.width ? toneHill(hill) : null;
 for (const f of systems) f.bbox = d3.geoPath().bounds(f);
 
 const CL = ["#c8553d", "#3d6e9e", "#7a9a3b", "#b8860b", "#6b4c9a", "#2e8b8b", "#a0522d", "#5f5f5f"];
@@ -81,7 +91,7 @@ function render() {
   for (const f of shown) { const c = fillOf(f.properties); if (!c) continue; ctx.beginPath(); path(f); ctx.fillStyle = alphaFill(c, fa); ctx.fill(); }
   ctx.save(); ctx.setLineDash(ink === "strong" ? [5, 3] : [3, 3]); ctx.beginPath(); for (const f of shown) path(f); ctx.strokeStyle = inkEdge(); ctx.lineWidth = ink === "strong" ? 0.9 : 0.55; ctx.stroke(); ctx.restore();
   // hillshade multiplied over the fills so the terrain shows through
-  if (hill.width && shade > 0) { ctx.save(); ctx.globalCompositeOperation = "soft-light"; ctx.globalAlpha = Math.min(1, shade); ctx.drawImage(hill, px0, py0, px1 - px0, py1 - py0); if (shade > 1) { ctx.drawImage(hill, px0, py0, px1 - px0, py1 - py0); ctx.globalCompositeOperation = "multiply"; ctx.globalAlpha = (shade - 1) * 0.6; ctx.drawImage(hill, px0, py0, px1 - px0, py1 - py0); } ctx.restore(); }
+  if (hillT && shade > 0) { ctx.save(); ctx.globalCompositeOperation = "soft-light"; ctx.globalAlpha = Math.min(1, shade); ctx.drawImage(hillT, px0, py0, px1 - px0, py1 - py0); if (shade > 1) { ctx.drawImage(hillT, px0, py0, px1 - px0, py1 - py0); ctx.globalCompositeOperation = "multiply"; ctx.globalAlpha = (shade - 1) * 0.6; ctx.drawImage(hillT, px0, py0, px1 - px0, py1 - py0); } ctx.restore(); }
   // rivers
   ctx.lineCap = "round"; ctx.lineJoin = "round";
   const sysOf = new Map(shown.map(f => [f.properties.system, f.properties]));

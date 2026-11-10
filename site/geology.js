@@ -68,13 +68,22 @@ async function loadLevel(name) {
   }
   cache.set(name, out); return out;
 }
+// Relief's hillshade PNG is light (flat ground sits near 180 of 255), and soft-light is neutral at mid grey, so drawn as it
+// comes it barely shows. Flat ground is moved to mid grey and the slopes stretched before the shade is composited.
+function toneHill(img, flat = 180, gain = 2.5) {
+  const c = document.createElement("canvas"); c.width = img.width; c.height = img.height;
+  const x = c.getContext("2d"); x.drawImage(img, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height), p = d.data;
+  for (let i = 0; i < p.length; i += 4) { const v = Math.max(0, Math.min(255, 128 + (p[i] - flat) * gain)); p[i] = p[i + 1] = p[i + 2] = v; }
+  x.putImageData(d, 0, 0); return c;
+}
 async function loadRelief(level) {
   if (!projected) return [null, null];
   const lv = doc.relief.hillshade[level] ? level : Object.keys(doc.relief.hillshade).slice(-1)[0];
   if (!hillCache.has(lv)) {
     const img = new Image(); img.src = doc.relief.hillshade[lv];
     await new Promise(res => { img.onload = res; img.onerror = res; });
-    hillCache.set(lv, img.width ? img : null);
+    hillCache.set(lv, img.width ? toneHill(img) : null);
     const b = await fetch(doc.relief.bands[lv]).then(r => r.ok ? r.json() : null).catch(() => null);
     bandCache.set(lv, b);
   }
