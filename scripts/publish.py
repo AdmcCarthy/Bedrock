@@ -42,6 +42,14 @@ def copy_tree(src: Path, dst: Path, allow=None) -> list[str]:
     return out
 
 
+def compact_slope_flow(path: Path) -> None:
+    g = json.loads(path.read_text(encoding="utf-8"))
+    for f in g["features"]:
+        f["properties"] = {"mean_gradient": round(f["properties"]["mean_gradient"], 4)}
+        f["geometry"]["coordinates"] = [[round(x), round(y)] for x, y in f["geometry"]["coordinates"]]
+    path.write_text(json.dumps(g, separators=(",", ":")), encoding="utf-8")
+
+
 def main() -> None:
     SITE.mkdir(exist_ok=True)
     manifest = {"geology": {}, "s2s": {}, "relief": {}, "excluded": {}}
@@ -93,6 +101,9 @@ def main() -> None:
         doc = json.loads((src / "layers.json").read_text(encoding="utf-8"))
         dst = SITE / "data" / "s2s" / r
         copy_tree(src, dst, allow=lambda f: f.suffix in (".topojson", ".geojson", ".json", ".csv"))
+        # the slope-flow lines are the site's largest files: the viewers read only mean_gradient, and metres need no decimals
+        if doc.get("slope_flow") and (dst / doc["slope_flow"]["file"]).exists():
+            compact_slope_flow(dst / doc["slope_flow"]["file"])
         fr = doc["relief"]["region"]
         doc["relief"]["hillshade"] = f"relief/{fr}/regional_hillshade.png"
         doc["relief"]["bands"] = f"relief/{fr}/regional.geojson"
