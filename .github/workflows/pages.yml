@@ -30,4 +30,5 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
         with:
-          timeout: 1800000   # the site is about 100 MB; syncing has taken longer than the default ten minutes
+          timeout: 600000   # the action's maximum; the site is about 100 MB and syncing can be slow
+          error_count: 20
