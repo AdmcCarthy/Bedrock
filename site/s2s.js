@@ -132,7 +132,8 @@ function fillOf(p) {
 }
 const alphaFill = (c, a) => { const k = d3.color(c); if (!k) return c; k.opacity = a; return k.formatRgb(); };
 const inkRiver = () => ink === "strong" ? (dark ? "rgba(160,205,255,.9)" : "rgba(30,80,140,.85)") : (dark ? "rgba(190,200,215,.45)" : "rgba(70,90,110,.42)");
-const inkEdge = () => ink === "strong" ? (dark ? "rgba(255,255,255,.4)" : "rgba(40,40,40,.5)") : (dark ? "rgba(255,255,255,.18)" : "rgba(60,60,60,.22)");
+// strong ink: solid black divides (near-white on the dark scheme); subtle ink: a thin dashed grey
+const inkEdge = () => ink === "strong" ? (dark ? "rgba(255,255,255,.75)" : "rgba(0,0,0,.85)") : (dark ? "rgba(255,255,255,.18)" : "rgba(60,60,60,.22)");
 
 let proj, path, W, H;
 function render() {
@@ -151,7 +152,7 @@ function render() {
   const shown = systems.filter(f => visible(f.properties));
   const fa = ink === "strong" ? (dark ? 0.55 : 0.5) : (dark ? 0.35 : 0.3);
   for (const f of shown) { const c = fillOf(f.properties); if (!c) continue; ctx.beginPath(); path(f); ctx.fillStyle = alphaFill(c, fa); ctx.fill(); }
-  ctx.save(); ctx.setLineDash(ink === "strong" ? [5, 3] : [3, 3]); ctx.beginPath(); for (const f of shown) path(f); ctx.strokeStyle = inkEdge(); ctx.lineWidth = ink === "strong" ? 0.9 : 0.55; ctx.stroke(); ctx.restore();
+  ctx.save(); if (ink !== "strong") ctx.setLineDash([3, 3]); ctx.beginPath(); for (const f of shown) path(f); ctx.strokeStyle = inkEdge(); ctx.lineWidth = ink === "strong" ? 1.3 : 0.55; ctx.lineJoin = "round"; ctx.stroke(); ctx.restore();
   // hillshade multiplied over the fills so the terrain shows through
   if (hillT && shade > 0) { ctx.save(); ctx.globalCompositeOperation = "soft-light"; ctx.globalAlpha = Math.min(1, shade); ctx.drawImage(hillT, px0, py0, px1 - px0, py1 - py0); if (shade > 1) { ctx.drawImage(hillT, px0, py0, px1 - px0, py1 - py0); ctx.globalCompositeOperation = "multiply"; ctx.globalAlpha = (shade - 1) * 0.6; ctx.drawImage(hillT, px0, py0, px1 - px0, py1 - py0); } ctx.restore(); }
   // rivers
