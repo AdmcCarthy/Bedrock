@@ -44,7 +44,10 @@ def main() -> None:
     socketserver.TCPServer.allow_reuse_address = True
     srv = socketserver.TCPServer(("127.0.0.1", a.port), Handler)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
-    pages = [(f"geology_{r}", f"geology.html?r={r}&shade=0.9") for r in man["geology"]] + [(f"s2s_{r}", f"s2s.html?r={r}&rivers=flow&fold=3") for r in man["s2s"]]
+    pages = [(f"geology_{r}", f"geology.html?r={r}&shade=0.9") for r in man["geology"]] + [(f"s2s_{r}", f"s2s.html?r={r}&rivers=all&fold=3") for r in man["s2s"]]
+    # the terrain view on the Relief frames, and one index view with its ticked bar
+    pages += [(f"geology_{r}_terrain", f"geology.html?r={r}&mode=terrain&shade=1.4") for r in man["geology"] if r in ("north_sea", "ne_europe_open")]
+    pages += [(f"s2s_{r}_quality", f"s2s.html?r={r}&mode=quality&rivers=all&fold=3") for r in man["s2s"] if r == "north_sea"]
     try:
         for theme in ("light", "dark"):
             for name, q in pages:

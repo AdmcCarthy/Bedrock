@@ -3,7 +3,9 @@
    A region exported in a Relief frame CRS (doc.relief) is drawn with an identity transform over Relief's hillshade
    (served from the sibling repo, so serve the repos' parent folder); a lon/lat region uses a conic projection.
    Views: age | lithology | age+hatch | tone (lithology hue, age as lightness on a linear ramp) | fjord (age alone on
-   SubScout's fjord ramp). Palettes: ics | vintage | paper. Frames: plain | vintage. Shade: 0 (off) to 1.5. */
+   SubScout's fjord ramp) | terrain (Relief frames only: Relief's height and depth classes, bedrock hidden).
+   Palettes: ics | vintage | paper. Frames: plain | vintage. Shade: 0 (off) to 1.5.
+   The sea floor is always on Relief's shelf depth scale (palette copied from Relief/preview/palette.js); the key shows it. */
 
 const params = new URLSearchParams(location.search);
 const region = params.get("r") || "norway";
@@ -118,6 +120,49 @@ function fillOf(p) {
 }
 const alphaFill = (hex, a) => { const c = d3.color(hex); if (!c) return hex; c.opacity = a; return c.formatRgb(); };
 
+/* Relief's Detuned house style, copied from Relief/preview/palette.js: the shelf depth ramp (0 to 1,300 m, linear) and the
+   temperate height ramp at half saturation. Relief's stacked bands are coloured at each band's midpoint, so the sea reads on
+   Relief's own depth scale under every view, the terrain view shows the land on its height scale, and the key shows both. */
+const RELIEF = {
+  seaStops: [0, 20, 50, 100, 200, 500, 1000], seaMax: 1300,
+  sea: { light: ["#e8f0f2", "#cfe1e6", "#aacdd8", "#7eb0c5", "#5891ae", "#3a6d94", "#264b73", "#162b50"], dark: ["#3a8aa2", "#2f7690", "#25647d", "#1c526b", "#144157", "#0e3045", "#092336", "#06172a"] },
+  landStops: [0, 50, 150, 300, 600, 1000, 1500, 2000], landMax: 2000,
+  landRaw: { light: ["#d6e8b8", "#c6dea0", "#bad38f", "#cbcf92", "#d9c897", "#ccb8a0", "#d8d0c6", "#efece8"], dark: ["#46572f", "#4c5d33", "#536237", "#5d633b", "#665f42", "#655d50", "#85807a", "#aaa6a1"] },
+};
+function tune(h, sat, mix) { const c = d3.rgb(h), y = 0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b, t = mix > 0 ? 255 : 0, m = Math.abs(mix); const f = v => { const g = y + (v - y) * sat; return g + (t - g) * m; }; return d3.rgb(f(c.r), f(c.g), f(c.b)).formatHex(); }
+function reliefColour(kind, metres) {
+  const cols = kind === "sea" ? RELIEF.sea[dark ? "dark" : "light"] : RELIEF.landRaw[dark ? "dark" : "light"].map(h => tune(h, 0.5, dark ? -0.08 : 0.08));
+  const br = kind === "sea" ? RELIEF.seaStops : RELIEF.landStops, max = kind === "sea" ? RELIEF.seaMax : RELIEF.landMax;
+  const stops = br.map((b, i) => [b / max, cols[i]]); if (cols.length > br.length) stops.push([1, cols.at(-1)]);
+  let t = Math.min(1, Math.max(0, metres / max)), k = 0; while (k < stops.length - 2 && t > stops[k + 1][0]) k++;
+  const [t0, c0] = stops[k], [t1, c1] = stops[k + 1]; return d3.interpolateRgb(c0, c1)(Math.min(1, Math.max(0, (t - t0) / (t1 - t0 || 1))));
+}
+// stacked bands, drawn from the outermost in: each band is "everything deeper (or higher) than its level", coloured at its midpoint
+function bandLevels(bands, kind) { return [...new Set(bands.features.filter(f => f.properties.kind === kind).map(f => Math.abs(f.properties.level)))].sort((a, b) => a - b); }
+function bandMid(levels, i) { return i + 1 < levels.length ? (levels[i] + levels[i + 1]) / 2 : levels[i] + (levels[i] - (levels[i - 1] ?? 0)) / 2; }
+function drawBands(bands, kind, alpha) {
+  const levels = bandLevels(bands, kind);
+  for (const [i, lv] of levels.entries()) {
+    const feats = bands.features.filter(f => f.properties.kind === kind && Math.abs(f.properties.level) === lv);
+    ctx.beginPath(); for (const f of feats) path(f); ctx.fillStyle = alphaFill(reliefColour(kind, bandMid(levels, i)), alpha); ctx.fill();
+  }
+  return levels;
+}
+/* Legend pieces: a stepped strip with the band breaks written under it, and a linear bar with ticks at named values, so a
+   log or a linear scale can be read at the values that matter rather than at its two ends. */
+const fmtN = v => v.toLocaleString("en-GB");
+function stepStrip(title, kind, levels) {
+  const cells = levels.map((lv, i) => `<span style="background:${reliefColour(kind, bandMid(levels, i))}" title="${fmtN(lv)}${i + 1 < levels.length ? "–" + fmtN(levels[i + 1]) : "+"} m"></span>`).join("");
+  const labs = levels.map((lv, i) => `<span>${fmtN(lv)}${i + 1 === levels.length ? "+" : ""}</span>`).join("");
+  return `<div class="k">${title}</div><div class="steps">${cells}</div><div class="labs">${labs}</div>`;
+}
+function tickBar(title, rampOf, ticks) {
+  const stops = d3.range(0, 1.001, 1 / 24).map(t => `<span style="flex:1;background:${rampOf(t)}"></span>`).join("");
+  const tk = ticks.map(([t, l]) => `<span style="left:${(100 * t).toFixed(1)}%">${l}</span>`).join("");
+  return `<div class="k">${title}</div><div class="bar">${stops}</div><div class="ticks">${tk}</div>`;
+}
+let reliefLevels = { sea: null, land: null };
+
 /* hatches */
 const hatchCache = new Map();
 function hatch(name) {
@@ -157,16 +202,17 @@ async function render() {
   ctx.fillRect(0, 0, width, height);
   if (vintage) paperGrain();
   ctx.save(); ctx.beginPath(); path(bboxFeature); ctx.clip();
-  // Relief sea bands and land wash under everything
+  // Relief's sea floor on its depth scale under everything (quieter on paper); in the terrain view the land on its height scale too
+  reliefLevels = { sea: null, land: null };
   if (bands) {
-    const sea = bands.features.filter(f => f.properties.kind === "sea").sort((a, b) => a.properties.level - b.properties.level);
-    for (const f of sea) { ctx.beginPath(); path(f); ctx.fillStyle = vintage ? "rgba(120,140,160,.10)" : (dark ? "rgba(24,38,58,.35)" : "rgba(120,160,200,.16)"); ctx.fill(); }
+    reliefLevels.sea = drawBands(bands, "sea", vintage ? 0.5 : 1);
+    if (mode === "terrain") reliefLevels.land = drawBands(bands, "land", vintage ? 0.85 : 1);
   }
   if (!projected) { ctx.beginPath(); path(d3.geoGraticule().step([5, 5])()); ctx.strokeStyle = vintage ? (dark ? "rgba(255,255,255,.12)" : "rgba(80,60,30,.22)") : (dark ? "rgba(255,255,255,.06)" : "rgba(0,0,0,.06)"); ctx.lineWidth = vintage ? 0.6 : 1; ctx.stroke(); }
   if (!vintage && !projected) { ctx.save(); ctx.shadowColor = dark ? "rgba(0,0,0,.6)" : "rgba(30,40,60,.28)"; ctx.shadowBlur = 18; ctx.shadowOffsetY = 4; ctx.fillStyle = dark ? "#2a3444" : "#ffffff";
     for (const L of layers) { ctx.beginPath(); for (const f of L.features) if (!f.properties.offshore) path(f); ctx.fill(); } ctx.restore(); }
   const alpha = vintage ? 0.92 : (dark ? 0.72 : 0.85);
-  for (const L of layers) {
+  for (const L of (mode === "terrain" ? [] : layers)) {
     for (const f of L.features) {
       const p = f.properties; ctx.beginPath(); path(f);
       ctx.fillStyle = alphaFill(fillOf(p), p.offshore ? alpha * 0.42 : alpha); ctx.fill();
@@ -209,7 +255,7 @@ function neatline(pad) {
   }
   ctx.textAlign = "left"; ctx.fillStyle = ink;
   ctx.font = "500 22px Georgia, serif"; ctx.fillText(doc.name.toUpperCase(), pad + 10, pad + 28);
-  const sub = { age: "Bedrock by age, after the International Chronostratigraphic Chart", lithology: "Bedrock by class", "age+hatch": "Age in colour, rock in hatch", tone: "Rock in colour, age in tone (older is darker)", fjord: "Age alone on the fjord ramp (older is darker)" }[mode];
+  const sub = { age: "Bedrock by age, after the International Chronostratigraphic Chart", lithology: "Bedrock by class", "age+hatch": "Age in colour, rock in hatch", tone: "Rock in colour, age in tone (older is darker)", fjord: "Age alone on the fjord ramp (older is darker)", terrain: "Relief terrain: height and depth classes, no bedrock" }[mode];
   ctx.font = "italic 12px Georgia, serif"; ctx.fillText(`${sub} · ${palette} palette`, pad + 10, pad + 46);
 }
 
@@ -218,6 +264,12 @@ function legend(chosen) {
   const counts = new Map();
   for (const L of layers) for (const f of L.features) { const k = (mode === "lithology" || mode === "tone") ? f.properties.litho_class : f.properties.ics_display; counts.set(k, (counts.get(k) || 0) + 1); }
   let html;
+  const depthKey = reliefLevels.sea ? `<div class="sep"></div>${stepStrip("Sea floor, depth in m (Relief, shelf scale)", "sea", reliefLevels.sea)}` : "";
+  if (mode === "terrain") {
+    html = `<h3>Terrain (Relief) · ${chosen}</h3>` + (reliefLevels.land ? stepStrip("Land, height in m", "land", reliefLevels.land) : "") + depthKey +
+      `<div class="k" style="margin-top:6px">Relief's Detuned style: stepped height classes, the sea floor on the shelf depth scale, hillshade as set above. Bedrock is hidden.</div>`;
+    el.innerHTML = html; el.classList.toggle("vintage", frame === "vintage"); el.classList.toggle("dark", dark); return;
+  }
   if (mode === "tone") {
     // bivariate grid: rows are classes present, columns are age steps on the same log scale as the fill
     const classes = [...counts].filter(([k]) => k && k !== "ice_water").sort((a, b) => b[1] - a[1]).map(([k]) => k);
@@ -226,8 +278,8 @@ function legend(chosen) {
     html = `<h3>Rock in colour, age in tone · ${chosen}</h3><div class="grid"><div class="grow"><span class="glab"></span>${steps.map(s => `<span class="ghead">${s >= 1000 ? (s / 1000) + " Ga" : s + " Ma"}</span>`).join("")}</div>` +
       classes.map(k => `<div class="grow"><span class="glab">${pal.labels[k]}</span>${steps.map(s => cell(k, s)).join("")}</div>`).join("") + `</div><div class="row"><span class="k">lightness runs with log age; the colour is the class</span></div>`;
   } else if (mode === "fjord") {
-    const stops = d3.range(0, 1.01, 0.1).map(t => `<span style="flex:1;background:${fjord(t)}"></span>`).join("");
-    html = `<h3>Age on the fjord ramp · ${chosen}</h3><div class="bar">${stops}</div><div class="ends"><span>3 Ma</span><span>300 Ma</span><span>3 Ga</span></div>`;
+    const tAt = ma => ageT({ age_old_ma: ma, age_young_ma: ma });
+    html = `<h3>Age on the fjord ramp · ${chosen}</h3>` + tickBar("Age of the unit, log scale (older is darker)", fjord, [[3, "3 Ma"], [10, "10"], [30, "30"], [100, "100"], [300, "300 Ma"], [1000, "1 Ga"], [3000, "3 Ga"]].map(([ma, l]) => [tAt(ma), l]));
   } else {
     let rows;
     if (mode === "lithology") rows = [...counts].filter(([k]) => k).sort((a, b) => b[1] - a[1]).map(([k, n]) => [lithoColour({ litho_class: k }), pal.labels[k] || k, n]);
@@ -244,7 +296,8 @@ function legend(chosen) {
     const title = mode === "lithology" ? "Bedrock class" : `Age (${palette === "ics" ? "ICS chart" : palette + " palette"})`;
     html = `<h3>${frame === "vintage" ? "Explication des couleurs" : title} · ${chosen}</h3>` + rows.map(([hex, label, n]) => `<div class="row"><span class="sw" style="background:${hex}"></span><span>${label}</span><span class="n">${n}</span></div>`).join("") + extra;
   }
-  el.innerHTML = html;
+  // the depth key sits first, above the unit list, which can be long enough to scroll
+  el.innerHTML = (reliefLevels.sea ? stepStrip("Sea floor, depth in m (Relief, shelf scale)", "sea", reliefLevels.sea) + `<div class="sep"></div>` : "") + html;
   el.querySelectorAll("canvas[data-hatch]").forEach(c => { const g = c.getContext("2d"); g.fillStyle = dark ? "#2a3444" : "#fff"; g.fillRect(0, 0, 14, 14); const h = hatch(c.dataset.hatch); if (h) { g.fillStyle = h; g.fillRect(0, 0, 14, 14); } });
   el.classList.toggle("vintage", frame === "vintage"); el.classList.toggle("dark", dark);
 }
@@ -266,7 +319,7 @@ function markLevel(chosen) {
 function controls() {
   const el = document.getElementById("modes");
   const gap = `<span style="width:10px;display:inline-block"></span>`;
-  el.innerHTML = [["age", "age"], ["lithology", "lithology"], ["age+hatch", "age + hatch"], ["tone", "rock + tone"], ["fjord", "fjord"]].map(([k, l]) => `<button class="seg" data-mode="${k}" aria-pressed="${k === mode}">${l}</button>`).join("") +
+  el.innerHTML = [["age", "age"], ["lithology", "lithology"], ["age+hatch", "age + hatch"], ["tone", "rock + tone"], ["fjord", "fjord"], ...(projected ? [["terrain", "terrain"]] : [])].map(([k, l]) => `<button class="seg" data-mode="${k}" aria-pressed="${k === mode}">${l}</button>`).join("") +
     gap + ["ics", "vintage", "paper"].map(k => `<button class="seg" data-palette="${k}" aria-pressed="${k === palette}">${k}</button>`).join("") +
     gap + ["plain", "vintage"].map(k => `<button class="seg" data-frame="${k}" aria-pressed="${k === frame}">${k} frame</button>`).join("") +
     (projected ? gap + [["0", "no shade"], ["0.6", "soft"], ["0.9", "shade"], ["1.4", "strong"]].map(([k, l]) => `<button class="seg" data-shade="${k}" aria-pressed="${+k === shade}">${l}</button>`).join("") : "");
