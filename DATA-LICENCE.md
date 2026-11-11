@@ -13,8 +13,10 @@ Only maps whose publishers allow open display are published. A unit's polygon he
 - Northern Ireland, GSNI bedrock 1:250 000: Open Government Licence v3.0. "Contains GSNI data under the Open Government Licence v3.0."
 - Ireland, GSI bedrock 1:500 000: CC BY 4.0 (read from the licence file in the archive). "Contains Irish Public Sector Data (Geological Survey Ireland) licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence."
 - Austria, GeoSphere geological units 1:500 000: CC BY 4.0 for the base map, as reported. "GeoSphere Austria."
+- Europe, IGME 5000 pre-Quaternary geology 1:5 000 000 (BGR): free of charge with citation; no licence name found. "Asch, K. and the IGME 5000 project (BGR); DOI 10.25928/igme-5000."
+- Poland, PIG geological map 1:1 000 000 (CBDG services): no licence name found; credit asked in the rules of use. "Source: Polish Geological Institute - National Research Institute (PIG-PIB)."
 
-Not published here because the terms are unverified or restrict display: the IGME 5000 (BGR, free with citation but no licence named), Poland's PIG maps (no terms found), Spain's IGME 1:1M (IGME reuse conditions), Greenland's GEUS 1:500 000 (no licence set). The private pipelines hold them; they can be added when their terms are read.
+The last two are shown on the owner's decision of 2026-11-10 that they are valid for non-commercial display with attribution, which is all this site does; if either publisher says otherwise they come down. Not published because the terms are unverified or restrict display: Spain's IGME 1:1M (IGME reuse conditions), Greenland's GEUS 1:500 000 (no licence set). The private pipelines hold them; they can be added when their terms are read.
 
 ## Catchments
 

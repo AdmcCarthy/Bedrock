@@ -24,12 +24,32 @@ RELIEF = P / "Relief"
 SITE = ROOT / "site"
 
 # regions whose maps all carry an open licence: NLOD (NGU), SGU open geodata, GTK open licence, OGL (BGS, GSNI), CC BY 4.0 (GSI, GeoSphere)
-GEOLOGY_REGIONS = ["norway", "uk_ireland", "north_sea", "fennoscandia", "alps_east", "ne_europe_open"]
+GEOLOGY_REGIONS = ["norway", "uk_ireland", "north_sea", "fennoscandia", "alps_east", "ne_europe", "ne_europe_open", "europe"]
+# plus the IGME 5000 and Poland's PIG 1:1M on the owner's decision of 2026-11-10 (valid for non-commercial display with attribution)
 OPEN_MAPS = {"no_ngu_n1350_units", "se_sgu_1m_bedrock", "fi_gtk_1m_rocktypes", "uk_bgs_625k_bedrock", "ni_gsni_250k_bedrock",
-             "ie_gsi_500k_bedrock", "at_geosphere_500k"}
+             "ie_gsi_500k_bedrock", "at_geosphere_500k", "eu_igme5000", "pl_pig_1m"}
 # catchment layers are HydroSHEDS geometry with derived statistics; the statistics cite every map used
 S2S_REGIONS = ["north_sea", "norwegian_sea", "ne_europe"]
 RELIEF_FRAMES = ["ne_europe", "north_sea", "norwegian_sea"]
+
+
+# Files over this size are not served from Pages (the deployment sync has timed out near 100 MB): publish.py moves them to
+# dist/<DATA_TAG>/ and rewrites their paths to the release asset, which scripts/release_data.py uploads. GitHub serves release
+# assets with open CORS, so the viewers fetch them directly.
+BIG_BYTES = 2_500_000
+DATA_TAG = "data-2026-11-10"
+RELEASE_URL = f"https://github.com/AdmcCarthy/Bedrock/releases/download/{DATA_TAG}/"
+DIST = ROOT / "dist" / DATA_TAG
+
+
+def offload(path: Path, kind: str, region: str) -> str | None:
+    """Move a big layer file to dist/ and return its release URL, or None when it stays on the site."""
+    if not path.exists() or path.stat().st_size <= BIG_BYTES:
+        return None
+    DIST.mkdir(parents=True, exist_ok=True)
+    name = f"{kind}__{region}__{path.name}"
+    shutil.move(str(path), DIST / name)
+    return RELEASE_URL + name
 
 
 def copy_tree(src: Path, dst: Path, allow=None) -> list[str]:
@@ -84,6 +104,11 @@ def main() -> None:
             continue
         dst = SITE / "data" / "geology" / r
         copy_tree(src, dst, allow=lambda f: f.suffix in (".topojson", ".json"))
+        for lv in doc["levels"].values():
+            for m in lv["maps"]:
+                if m.get("file") and (url := offload(dst / m["file"], "geology", r)):
+                    m["file"] = url
+        (dst / "layers.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False), encoding="utf-8")
         # the relief references point at this site
         if doc.get("relief"):
             fr = doc["relief"]["region"]
@@ -109,6 +134,11 @@ def main() -> None:
         # the slope-flow lines are the site's largest files: the viewers read only mean_gradient, and metres need no decimals
         if doc.get("slope_flow") and (dst / doc["slope_flow"]["file"]).exists():
             compact_slope_flow(dst / doc["slope_flow"]["file"])
+            if url := offload(dst / doc["slope_flow"]["file"], "s2s", r):
+                doc["slope_flow"]["file"] = url
+        for k, f in list(doc["files"].items()):
+            if url := offload(dst / f, "s2s", r):
+                doc["files"][k] = url
         fr = doc["relief"]["region"]
         doc["relief"]["hillshade"] = f"relief/{fr}/regional_hillshade.png"
         doc["relief"]["bands"] = f"relief/{fr}/regional.geojson"
