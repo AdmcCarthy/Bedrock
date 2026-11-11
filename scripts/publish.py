@@ -11,6 +11,7 @@ Usage: uv run --project ../geology-map-processing python scripts/publish.py
 from __future__ import annotations
 
 import json
+import os
 import shutil
 from pathlib import Path
 
@@ -36,7 +37,7 @@ RELIEF_FRAMES = ["ne_europe", "north_sea", "norwegian_sea"]
 # Files over this size are not served from Pages (the deployment sync has timed out near 100 MB): publish.py moves them to
 # dist/<DATA_TAG>/ and rewrites their paths to the release asset, which scripts/release_data.py uploads. GitHub serves release
 # assets with open CORS, so the viewers fetch them directly.
-BIG_BYTES = 2_500_000
+BIG_BYTES = int(os.environ.get("BEDROCK_BIG_BYTES", 2_500_000))   # a huge value keeps everything local, for measuring
 DATA_TAG = "data-2026-11-10"
 RELEASE_URL = f"https://github.com/AdmcCarthy/Bedrock/releases/download/{DATA_TAG}/"
 DIST = ROOT / "dist" / DATA_TAG
@@ -62,12 +63,22 @@ def copy_tree(src: Path, dst: Path, allow=None) -> list[str]:
     return out
 
 
-def compact_slope_flow(path: Path) -> None:
+def compact_slope_flow(path: Path) -> Path:
+    """The slope-flow GeoJSON as the viewer's compact form: integer metres, each line as its first point then deltas,
+    one gradient per line (about a third of the GeoJSON). Returns the new file; the GeoJSON is removed."""
     g = json.loads(path.read_text(encoding="utf-8"))
+    lines, grad = [], []
     for f in g["features"]:
-        f["properties"] = {"mean_gradient": round(f["properties"]["mean_gradient"], 4)}
-        f["geometry"]["coordinates"] = [[round(x), round(y)] for x, y in f["geometry"]["coordinates"]]
-    path.write_text(json.dumps(g, separators=(",", ":")), encoding="utf-8")
+        pts = [(round(x), round(y)) for x, y in f["geometry"]["coordinates"]]
+        row = [pts[0][0], pts[0][1]]
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            row += [x1 - x0, y1 - y0]
+        lines.append(row)
+        grad.append(round(f["properties"]["mean_gradient"], 4))
+    out = path.with_name("slope_flow.json")
+    out.write_text(json.dumps({"q": 1, "lines": lines, "grad": grad}, separators=(",", ":")), encoding="utf-8")
+    path.unlink()
+    return out
 
 
 def main() -> None:
@@ -133,9 +144,8 @@ def main() -> None:
         copy_tree(src, dst, allow=lambda f: f.suffix in (".topojson", ".geojson", ".json", ".csv"))
         # the slope-flow lines are the site's largest files: the viewers read only mean_gradient, and metres need no decimals
         if doc.get("slope_flow") and (dst / doc["slope_flow"]["file"]).exists():
-            compact_slope_flow(dst / doc["slope_flow"]["file"])
-            if url := offload(dst / doc["slope_flow"]["file"], "s2s", r):
-                doc["slope_flow"]["file"] = url
+            compact = compact_slope_flow(dst / doc["slope_flow"]["file"])
+            doc["slope_flow"]["file"] = offload(compact, "s2s", r) or compact.name
         for k, f in list(doc["files"].items()):
             if url := offload(dst / f, "s2s", r):
                 doc["files"][k] = url
