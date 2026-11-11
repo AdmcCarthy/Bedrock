@@ -90,15 +90,21 @@ def main() -> None:
         d = SITE / "relief" / fr
         d.mkdir(parents=True, exist_ok=True)
         man = json.loads((RELIEF / "data" / "out" / fr / "manifest.json").read_text(encoding="utf-8"))
-        Image.open(RELIEF / "data" / "out" / fr / "regional_hillshade.png").convert("L").save(d / "regional_hillshade.png", optimize=True)
-        shutil.copy2(RELIEF / "data" / "out" / fr / "regional.geojson", d / "regional.geojson")
-        Image.open(RELIEF / "data" / "out" / fr / "overview_hillshade.png").convert("L").save(d / "overview_hillshade.png", optimize=True)
-        shutil.copy2(RELIEF / "data" / "out" / fr / "overview.geojson", d / "overview.geojson")
-        # Relief's base map (linear bathymetry, stepped climate-tinted land) and the part of its manifest the viewers read
-        if man.get("base"):
-            for name in man["base"]["regional"].values():
-                shutil.copy2(RELIEF / "data" / "out" / fr / name, d / name)
-            (d / "manifest.json").write_text(json.dumps({"area": man["area"], "crs": man["crs"], "extent": man["extent"], "base": man["base"]}, indent=1), encoding="utf-8")
+        src_dir = RELIEF / "data" / "out" / fr
+        shutil.rmtree(d); d.mkdir(parents=True)
+        base = man.get("base") or {}
+        if base.get("webp") and base.get("shade"):
+            # the web assets Relief wrote: WebP tints (a fifth of the PNG) and the neutral shade; the viewers need nothing else
+            for name in [*base["webp"].values(), base["shade"]["file"]]:
+                shutil.copy2(src_dir / name, d / name)
+            shutil.copy2(src_dir / "regional.geojson", d / "regional.geojson")   # the viewers' fallback, fetched only without a base
+        else:
+            Image.open(src_dir / "regional_hillshade.png").convert("L").save(d / "regional_hillshade.png", optimize=True)
+            shutil.copy2(src_dir / "regional.geojson", d / "regional.geojson")
+            for name in base.get("regional", {}).values():
+                shutil.copy2(src_dir / name, d / name)
+        if base:
+            (d / "manifest.json").write_text(json.dumps({"area": man["area"], "crs": man["crs"], "extent": man["extent"], "base": base}, indent=1), encoding="utf-8")
         manifest["relief"][fr] = {"crs": man["crs"], "extent": man["extent"], "attribution": "Relief (github.com/AdmcCarthy/Relief): Copernicus DEM GLO-90 (ESA), EMODnet Bathymetry; Kartverket and MAREANO on the Norwegian Sea frame"}
 
     # geology regions
@@ -123,8 +129,10 @@ def main() -> None:
         # the relief references point at this site
         if doc.get("relief"):
             fr = doc["relief"]["region"]
-            doc["relief"]["hillshade"] = {k: f"relief/{fr}/{k}_hillshade.png" for k in doc["relief"]["hillshade"] if (SITE / "relief" / fr / f"{k}_hillshade.png").exists()}
-            doc["relief"]["bands"] = {k: f"relief/{fr}/{k}.geojson" for k in doc["relief"]["bands"] if (SITE / "relief" / fr / f"{k}.geojson").exists()}
+            # the viewer derives the frame folder from the hillshade path and reads the manifest there; the regional entry
+            # names the folder even when only the WebP shade exists
+            doc["relief"]["hillshade"] = {"regional": f"relief/{fr}/regional_hillshade.png"}
+            doc["relief"]["bands"] = {"regional": f"relief/{fr}/regional.geojson"}
             (dst / "layers.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False), encoding="utf-8")
         lic = {}
         for lv in doc["levels"].values():
@@ -162,12 +170,13 @@ def main() -> None:
     extra = (S2S / "preview" / "style.css").read_text(encoding="utf-8").split("/* source-to-sink additions */")[-1]
     (SITE / "style.css").write_text(css + "\n/* source-to-sink additions */" + extra, encoding="utf-8")
     g = (GEO / "preview" / "map.js").read_text(encoding="utf-8")
-    g = g.replace('const base = `../data/display/${region}/`;', 'const base = `data/geology/${region}/`;').replace('"../../" + doc.relief.hillshade[lv]', 'doc.relief.hillshade[lv]').replace('"../../" + doc.relief.bands[lv]', 'doc.relief.bands[lv]')
+    # every Relief path in the previews is `"../../" + doc.relief.<x>` (the sibling checkout); on this site they are local
+    g = g.replace('const base = `../data/display/${region}/`;', 'const base = `data/geology/${region}/`;').replace('"../../" + doc.relief.', 'doc.relief.')
     (SITE / "geology.js").write_text(g, encoding="utf-8")
     h = (GEO / "preview" / "map.html").read_text(encoding="utf-8").replace('src="map.js"', 'src="geology.js"').replace('<a href="index.html">Geology map layers</a>', '<a href="index.html">Bedrock</a>')
     (SITE / "geology.html").write_text(h, encoding="utf-8")
     s = (S2S / "preview" / "map.js").read_text(encoding="utf-8")
-    s = s.replace('const base = `../data/derived/${region}/`;', 'const base = `data/s2s/${region}/`;').replace('fetch("../../" + doc.relief.bands)', 'fetch(doc.relief.bands)').replace('hill.src = "../../" + doc.relief.hillshade;', 'hill.src = doc.relief.hillshade;')
+    s = s.replace('const base = `../data/derived/${region}/`;', 'const base = `data/s2s/${region}/`;').replace('"../../" + doc.relief.', 'doc.relief.')
     (SITE / "s2s.js").write_text(s, encoding="utf-8")
     h2 = (S2S / "preview" / "map.html").read_text(encoding="utf-8").replace('src="map.js"', 'src="s2s.js"').replace('<a href="index.html">Source to sink</a>', '<a href="index.html">Bedrock</a>')
     (SITE / "s2s.html").write_text(h2, encoding="utf-8")
