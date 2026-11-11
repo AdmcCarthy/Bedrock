@@ -12,3 +12,9 @@ Regions: Norway, Britain and Ireland, the North Sea, Fennoscandia, Austria and a
 The layers are published from the author's private pipelines (`europe-gis-data`, `geology-map-processing`, `source-to-sink`) by `scripts/publish.py`, which copies only regions whose every map carries an open licence for display and writes the sources into `site/manifest.json`. `DATA-LICENCE.md` is the record of terms. The site is static; GitHub Pages serves `site/` as it is.
 
 Add `&theme=light` or `&theme=dark` to a page address to force a theme; the other options are buttons on the page.
+
+## Licence and acknowledgement
+
+MIT License with Acknowledgement ([LICENSE](LICENSE)): the MIT terms plus one condition. Anything built with this work says so,
+visibly and in plain words, and does not imply endorsement: "Built with Bedrock by Adam McCarthy (https://github.com/AdmcCarthy/Bedrock)". The wording is custom, so
+the licence is not OSI-approved. Data terms are in DATA-LICENCE.md; layers derived from third-party maps keep their own terms and attribution.
